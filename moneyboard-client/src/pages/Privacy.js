@@ -5,6 +5,7 @@ class Privacy extends Component {
         return (
             <div>
                 <h1>Privacy =</h1>
+                <h1>Privacy =</h1>
             </div>
         );
     }
