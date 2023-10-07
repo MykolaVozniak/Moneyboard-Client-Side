@@ -25,7 +25,7 @@ class Home extends Component {
                                     <h4>Thesis 3</h4>
                                 </Carousel.Item>
                             </Carousel>
-                            <div className='d-flex justify-content-center mt-4'>
+                            <div className='mt-4'>
                                 <Link to="/login">
                                     <Button variant="success" className="btn-lg">Get started!</Button>
                                 </Link>
