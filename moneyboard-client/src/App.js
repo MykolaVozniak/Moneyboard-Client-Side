@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 
+import axios from 'axios';
+
 function App() {
   return (
     <>
