@@ -6,6 +6,7 @@ import Privacy from './pages/Privacy';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import Officex from './pages/Officex';
 
 import axios from 'axios';
 
@@ -19,6 +20,7 @@ function App() {
             <Route path='/privacy' element={<Privacy />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/office' element={<Officex />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
