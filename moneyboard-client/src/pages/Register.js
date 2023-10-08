@@ -19,7 +19,7 @@ class Register extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = 'https://localhost:44339/api/Authentication/registration';
+    const url = API_URL + 'api/Authentication/registration';
 
     try {
       const response = await fetch(url, {
