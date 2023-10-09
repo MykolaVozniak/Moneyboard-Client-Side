@@ -28,9 +28,15 @@ const Home = () => {
                             </Carousel.Item>
                         </Carousel>
                         <div className='mt-4'>
-                            <Link to="/login">
-                                <Button variant="success" className="btn-lg">Get started!</Button>
-                            </Link>
+                            {isLoggedIn() ? (
+                                <Link to="/workspace">
+                                    <Button variant="success" className="btn-lg">Get to work!</Button>
+                                </Link>
+                            ) : (
+                                <Link to="/login">
+                                    <Button variant="success" className="btn-lg">Get started!</Button>
+                                </Link>
+                            )}
                         </div>
                     </Col>
                     <Col xs={12} md={6}>

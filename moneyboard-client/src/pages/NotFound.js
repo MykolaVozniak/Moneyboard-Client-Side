@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class NotFound extends Component {
-    render() {
-        return (
-            <div>
-                404
+import picture from '../resources/logo512.png';
+
+const NotFound = () => {
+    return (
+        <div className="container my-5 d-flex align-items-center justify-content-center">
+            <div className="row">
+                <div className="col-md-6">
+                    <img src={picture} alt="Not Found" className="img-fluid" />
+                </div>
+                <div className="col-md-6">
+                    <h2 className="mb-4">Oops! This Page Doesn't Exist</h2>
+                    <p>It seems that the page you were trying to access doesn't exist. Please check the URL and try again.</p>
+                </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default NotFound;
