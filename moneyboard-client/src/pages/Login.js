@@ -2,7 +2,7 @@ import API_URL from '../config';
 import React, { useState } from 'react';
 import { useAuth } from '../autentification/AuthContext';
 
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -28,7 +28,7 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                const token = data.token; // Припустимо, що сервер надсилає токен як властивість 'token'
+                const token = data.token; // 'token'
                 login(token);
                 alert('Ви успішно увійшли!');
                 setLoggedIn(true);
@@ -42,39 +42,44 @@ const Login = () => {
 
     if (isLoggedIn) {
         setTimeout(() => {
-            window.location.reload(); // f*kin cringe but it works
-          }, 0);
-        return <Navigate to="/workspace" />;
+            window.location.reload(); // cringe
+        }, 1);
+        return <Navigate to='/workspace' />;
     }
 
     return (
-        <div className="container col-5 my-4">
-            <h2 className='text-center'>Log In</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mt-3">
-                    <label className="form-label">Email:</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+        <div className='container col-4 my-4'>
+            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+                <h2 className='text-center'>Authorization</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className='mt-3'>
+                        <input
+                            type='email'
+                            className='form-control'
+                            placeholder='Your email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className='mt-3'>
+                        <input
+                            type='password'
+                            className='form-control'
+                            placeholder='Your password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className='d-flex justify-content-center mt-4'>
+                        <button type='submit' className='btn btn-primary col-6'>Sign In</button>
+                    </div>
+                </form>
+                <div className='mt-3'>
+                    <p className='text-center'>Don't have account? <Link to='/register'>Sign Up</Link></p>
                 </div>
-                <div className="mt-3">
-                    <label className="form-label">Пароль:</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className='d-flex justify-content-center mt-4'>
-                <button type="submit" className="btn btn-primary col-6">Увійти</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 }

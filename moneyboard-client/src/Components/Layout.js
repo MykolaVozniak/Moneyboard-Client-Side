@@ -3,12 +3,12 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 
-import logo from '../resources/logo192.png';
+import logo from '../resources/Logos/MbLogoCompact.png';
 
 import { useAuth } from '../autentification/AuthContext';
 
 const Layout = () => {
-  const { isLoggedIn, logout} = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -23,7 +23,6 @@ const Layout = () => {
               src={logo}
               alt='MbLogo'
               height='30'
-              width='30'
               className='d-inline-block align-top mx-2'
             />
             Moneyboard
@@ -55,9 +54,9 @@ const Layout = () => {
         </Navbar>
       </header>
 
-      <main className='flex-grow-1'>
-        <div className='bg-white pt-5'>
-          <div className='mx-4 my-3'>
+      <main className='flex-grow-1 bg-light'>
+        <div className='pt-5'>
+          <div className='mx-4 my-3 text-lg'>
             <Outlet />
           </div>
         </div>

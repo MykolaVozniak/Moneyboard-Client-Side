@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import API_URL from '../config';
 
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -37,7 +37,6 @@ const Register = () => {
             if (response.ok) {
                 alert('Реєстрація успішна!');
                 setIsRegistered(true);
-                // Додайте тут код для перенаправлення користувача на іншу сторінку, наприклад, після успішної реєстрації
             } else {
                 alert('Помилка реєстрації. Будь ласка, спробуйте ще раз.');
             }
@@ -48,96 +47,101 @@ const Register = () => {
     };
 
     if (isRegistered) {
-        return <Navigate to="/login" />;
+        return <Navigate to='/login' />;
     }
 
     return (
-        <div className="container col-5 my-4">
-            <h2 className='text-center'>Registration</h2>
-            <form onSubmit={handleSubmit}>
-                <div className='row mt-3'>
-                    <div className=" col-6">
-                        <label className="form-label">Name:</label>
+        <div className='container col-4 my-4'>
+            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+                <h2 className='text-center'>Registration</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className='row mt-3'>
+                        <div className=' col-6'>
+                            <input
+                                type='text'
+                                className='form-control'
+                                placeholder='Firstname'
+                                name='firstname'
+                                value={formData.firstname}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className='col-6'>
+                            <input
+                                type='text'
+                                className='form-control'
+                                placeholder='Lastname'
+                                name='lastname'
+                                value={formData.lastname}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className='mt-3'>
                         <input
-                            type="text"
-                            className="form-control"
-                            name="firstname"
-                            value={formData.firstname}
+                            type='email'
+                            className='form-control'
+                            placeholder='Email'
+                            name='email'
+                            value={formData.email}
                             onChange={handleChange}
                             required
                         />
                     </div>
-                    <div className="col-6">
-                        <label className="form-label">Surname:</label>
+                    <div className='mt-3'>
                         <input
-                            type="text"
-                            className="form-control"
-                            name="lastname"
-                            value={formData.lastname}
+                            type='password'
+                            className='form-control'
+                            placeholder='Password'
+                            name='password'
+                            value={formData.password}
                             onChange={handleChange}
                             required
                         />
                     </div>
+                    <div className='mt-3'>
+                        <input
+                            type='text'
+                            className='form-control'
+                            placeholder='Payment card number'
+                            name='cardNumber'
+                            value={formData.cardNumber}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='mt-3'>
+                        <input
+                            type='date'
+                            className='form-control'
+                            placeholder='Birthdate'
+                            name='birthDay'
+                            value={formData.birthDay}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='mt-3'>
+                        <input
+                            type='text'
+                            className='form-control'
+                            placeholder='Url image'
+                            name='imageUrl'
+                            value={formData.imageUrl}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className='d-flex justify-content-center mt-4'>
+                        <button type='submit' className='btn btn-primary col-8'>Submit</button>
+                    </div>
+                </form>
+                <div className='mt-3'>
+                    <p className='text-center'>Already have account? <Link to='/login'>Sign In</Link></p>
                 </div>
-                <div className="mt-2">
-                    <label className="form-label">Email:</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mt-2">
-                    <label className="form-label">Password:</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mt-2">
-                    <label className="form-label">Payment card number:</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="cardNumber"
-                        value={formData.cardNumber}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mt-2">
-                    <label className="form-label">Date of birth:</label>
-                    <input
-                        type="date"
-                        className="form-control"
-                        name="birthDay"
-                        value={formData.birthDay}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mt-2">
-                    <label className="form-label">URL image:</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="imageUrl"
-                        value={formData.imageUrl}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className='d-flex justify-content-center mt-4'>
-                <button type="submit" className="btn btn-primary col-8">Submit</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };

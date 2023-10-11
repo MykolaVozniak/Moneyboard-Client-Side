@@ -14,7 +14,7 @@ const Home = () => {
             <Container>
                 <Row className='row align-items-center'>
                     <Col xs={12} md={6}>
-                        <p className="fw-bold display-1">Moneyboard</p>
+                        <p className='fw-bold display-1'>Moneyboard</p>
                         <h4 className='mt-4'>The best solution for money management</h4>
                         <Carousel controls={false}>
                             <Carousel.Item>
@@ -29,12 +29,12 @@ const Home = () => {
                         </Carousel>
                         <div className='mt-4'>
                             {isLoggedIn() ? (
-                                <Link to="/workspace">
-                                    <Button variant="success" className="btn-lg">Get to work!</Button>
+                                <Link to='/workspace'>
+                                    <Button variant='success' className='btn-lg'>Get to work!</Button>
                                 </Link>
                             ) : (
-                                <Link to="/login">
-                                    <Button variant="success" className="btn-lg">Get started!</Button>
+                                <Link to='/login'>
+                                    <Button variant='success' className='btn-lg'>Get started!</Button>
                                 </Link>
                             )}
                         </div>
@@ -43,8 +43,8 @@ const Home = () => {
                         <div className='d-flex justify-content-center mt-4'>
                             <img
                                 src={picture}
-                                alt="picture"
-                                width="90%"
+                                alt='picture'
+                                width='75%'
                                 className='d-flex justify-content-center'
                             />
                         </div>
