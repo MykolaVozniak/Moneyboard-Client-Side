@@ -1,5 +1,4 @@
 import React from 'react';
-
 import picture from '../resources/Fillers/frogCute.png';
 
 const NotFound = () => {

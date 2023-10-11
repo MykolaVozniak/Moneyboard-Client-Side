@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import API_URL from '../config';
-
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.auth.user);
+
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -11,10 +14,8 @@ const Register = () => {
         password: '',
         cardNumber: '',
         birthDay: '',
-        imageUrl: ''
+        imageUrl: '',
     });
-
-    const [isRegistered, setIsRegistered] = useState(false); // Додайте стан для переадресації
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,32 +23,29 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const url = API_URL + 'api/Authentication/registration';
-
         try {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
-                alert('Реєстрація успішна!');
-                setIsRegistered(true);
+                alert('Success!');
+                navigate('/login');
             } else {
-                alert('Помилка реєстрації. Будь ласка, спробуйте ще раз.');
+                alert('Fail!');
             }
         } catch (error) {
             console.error('Помилка:', error);
         }
-
     };
 
-    if (isRegistered) {
-        return <Navigate to='/login' />;
+    if (isLoggedIn) {
+        return <Navigate to="/" />;
     }
 
     return (

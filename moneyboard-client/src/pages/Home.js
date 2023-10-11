@@ -1,14 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Carousel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
 import picture from '../resources/logo512.png';
-import { useAuth } from '../autentification/AuthContext';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const Home = () => {
-
-    const { isLoggedIn } = useAuth();
-
+    const isLoggedIn = useSelector((state) => state.auth.user);
     return (
         <>
             <Container>
@@ -28,7 +26,7 @@ const Home = () => {
                             </Carousel.Item>
                         </Carousel>
                         <div className='mt-4'>
-                            {isLoggedIn() ? (
+                            {isLoggedIn ? (
                                 <Link to='/workspace'>
                                     <Button variant='success' className='btn-lg'>Get to work!</Button>
                                 </Link>

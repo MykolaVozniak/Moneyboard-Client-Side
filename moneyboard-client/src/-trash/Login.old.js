@@ -1,58 +1,50 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { setUser, setError } from '../redux/authSlice';
 import API_URL from '../config';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useAuth } from '../autentification/AuthContext';
+
+import { Link, Navigate } from 'react-router-dom';
 
 const Login = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const isLoggedIn = useSelector((state) => state.auth.user);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const { login } = useAuth();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const url = API_URL + 'api/Authentication/login';
+    const [isLoggedIn, setLoggedIn] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const url = API_URL + 'api/Authentication/login';
+
         try {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ email, password })
             });
 
             if (response.ok) {
                 const data = await response.json();
-                dispatch(setUser(data));
-                alert('Success');
-                navigate('/workspace');
+                const token = data.token; // 'token'
+                login(token);
+                alert('Ви успішно увійшли!');
+                setLoggedIn(true);
             } else {
-                const errorData = await response.json();
-                dispatch(setError(errorData.error));
-                alert('Fail');
+                alert('Помилка входу. Будь ласка, перевірте ваш email та пароль.');
             }
         } catch (error) {
-            console.error(error);
+            console.error('Помилка:', error);
         }
     };
 
     if (isLoggedIn) {
-        return <Navigate to="/" />;
+        setTimeout(() => {
+            window.location.reload(); // cringe
+        }, 1);
+        return <Navigate to='/workspace' />;
     }
 
     return (
@@ -62,27 +54,21 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <div className='mt-3'>
                         <input
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-
+                            type='email'
                             className='form-control'
                             placeholder='Your email'
-
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div className='mt-3'>
                         <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-
+                            type='password'
                             className='form-control'
                             placeholder='Your password'
-
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>

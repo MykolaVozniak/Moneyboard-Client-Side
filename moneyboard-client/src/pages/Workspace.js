@@ -1,21 +1,19 @@
 import React from 'react';
-import { useAuth } from '../autentification/AuthContext';
-import { Navigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const Workspace = () => {
-  const { isLoggedIn, token } = useAuth();
+  const isLoggedIn = useSelector((state) => state.auth.user);
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div>
-      {isLoggedIn() ? (
-        <div>
-          <h2>Workspace</h2>
-          <p>Ім'я користувача: {token}</p>
-        </div>
-      ) : (
-        <Navigate to='/login' />
-      )}
+      <p>Вітаємо, {isLoggedIn.Token}!</p>
     </div>
+
   );
 };
 

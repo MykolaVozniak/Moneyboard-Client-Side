@@ -1,83 +1,150 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import API_URL from '../config';
 
-class Register extends Component {
+import { Link, Navigate } from 'react-router-dom';
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstname: '',
-            lastname: '',
-            email: '',
-            password: '',
-            cardNumber: '',
-            birthDay: '',
-            imageUrl: ''
-        };
-    }
+const Register = () => {
+    const [formData, setFormData] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        cardNumber: '',
+        birthDay: '',
+        imageUrl: ''
+    });
 
-    handleInputChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    }
+    const [isRegistered, setIsRegistered] = useState(false); // Додайте стан для переадресації
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-        fetch(API_URL+'api/Authentication/registration', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Registration successful:', data);
-            })
-            .catch(error => {
-                console.error('Error registering:', error);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const url = API_URL + 'api/Authentication/registration';
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             });
+
+            if (response.ok) {
+                alert('Реєстрація успішна!');
+                setIsRegistered(true);
+            } else {
+                alert('Помилка реєстрації. Будь ласка, спробуйте ще раз.');
+            }
+        } catch (error) {
+            console.error('Помилка:', error);
+        }
+
+    };
+
+    if (isRegistered) {
+        return <Navigate to='/login' />;
     }
 
-    render() {
-        return (
-            <div>
-                <h2>Register</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label>First Name:</label>
-                        <input type="text" name="firstname" onChange={this.handleInputChange} required />
+    return (
+        <div className='container col-4 my-4'>
+            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+                <h2 className='text-center'>Registration</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className='row mt-3'>
+                        <div className=' col-6'>
+                            <input
+                                type='text'
+                                className='form-control'
+                                placeholder='Firstname'
+                                name='firstname'
+                                value={formData.firstname}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className='col-6'>
+                            <input
+                                type='text'
+                                className='form-control'
+                                placeholder='Lastname'
+                                name='lastname'
+                                value={formData.lastname}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label>Last Name:</label>
-                        <input type="text" name="lastname" onChange={this.handleInputChange} required />
+                    <div className='mt-3'>
+                        <input
+                            type='email'
+                            className='form-control'
+                            placeholder='Email'
+                            name='email'
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <div>
-                        <label>Email:</label>
-                        <input type="email" name="email" onChange={this.handleInputChange} required />
+                    <div className='mt-3'>
+                        <input
+                            type='password'
+                            className='form-control'
+                            placeholder='Password'
+                            name='password'
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <div>
-                        <label>Password:</label>
-                        <input type="password" name="password" onChange={this.handleInputChange} required />
+                    <div className='mt-3'>
+                        <input
+                            type='text'
+                            className='form-control'
+                            placeholder='Payment card number'
+                            name='cardNumber'
+                            value={formData.cardNumber}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <div>
-                        <label>Card Number:</label>
-                        <input type="text" name="cardNumber" onChange={this.handleInputChange} required />
+                    <div className='mt-3'>
+                        <input
+                            type='date'
+                            className='form-control'
+                            placeholder='Birthdate'
+                            name='birthDay'
+                            value={formData.birthDay}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <div>
-                        <label>Birth Day:</label>
-                        <input type="date" name="birthDay" onChange={this.handleInputChange} required />
+                    <div className='mt-3'>
+                        <input
+                            type='text'
+                            className='form-control'
+                            placeholder='Url image'
+                            name='imageUrl'
+                            value={formData.imageUrl}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
-                    <div>
-                        <label>Image URL:</label>
-                        <input type='url' name="imageUrl" onChange={this.handleInputChange} required />
+                    <div className='d-flex justify-content-center mt-4'>
+                        <button type='submit' className='btn btn-primary col-8'>Submit</button>
                     </div>
-                    <button type="submit">Register</button>
                 </form>
+                <div className='mt-3'>
+                    <p className='text-center'>Already have account? <Link to='/login'>Sign In</Link></p>
+                </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default Register;

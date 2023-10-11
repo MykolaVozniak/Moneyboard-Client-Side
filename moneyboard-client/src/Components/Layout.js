@@ -2,16 +2,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../resources/Logos/MbLogoCompact.png';
-
-import { useAuth } from '../autentification/AuthContext';
+import { logoutUser } from '../redux/authSlice';
 
 const Layout = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const isLoggedIn = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    logout();
+    dispatch(logoutUser());
   };
 
   return (
@@ -29,12 +30,14 @@ const Layout = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            {isLoggedIn() ? (
+            {isLoggedIn ? (
               <>
                 <Nav className='col justify-content-start'>
+                  <Nav.Link as={Link} to='/'>Home</Nav.Link>
                   <Nav.Link as={Link} to='/workspace'>Workspace</Nav.Link>
                 </Nav>
                 <Nav className='col justify-content-end'>
+                  <Nav.Link as={Link} to='/myAccount'>My Account</Nav.Link>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 </Nav>
               </>
@@ -72,3 +75,4 @@ const Layout = () => {
 };
 
 export default Layout;
+
