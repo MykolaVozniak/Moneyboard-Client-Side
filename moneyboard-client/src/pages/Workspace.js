@@ -11,7 +11,7 @@ const Workspace = () => {
 
   return (
     <div>
-      <p>Вітаємо, {isLoggedIn.Token}!</p>
+      <p>Вітаємо, {isLoggedIn.RefreshToken}!</p>
     </div>
 
   );

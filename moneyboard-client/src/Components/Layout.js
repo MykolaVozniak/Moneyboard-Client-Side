@@ -37,7 +37,7 @@ const Layout = () => {
                   <Nav.Link as={Link} to='/workspace'>Workspace</Nav.Link>
                 </Nav>
                 <Nav className='col justify-content-end'>
-                  <Nav.Link as={Link} to='/myAccount'>My Account</Nav.Link>
+                  <Nav.Link as={Link} to='/account'>My Account</Nav.Link>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 </Nav>
               </>

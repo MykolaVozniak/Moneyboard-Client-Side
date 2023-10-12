@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Workspace from './pages/Workspace';
+import Account from './pages/Account';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
               <Route path='/workspace' element={<Workspace />} />
+              <Route path='/account' element={<Account />} />
               <Route path='*' element={<NotFound />} />
             </Route>
           </Routes>
