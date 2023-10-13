@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import API_URL from '../config';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 

@@ -11,21 +11,15 @@ const Account = (props) => {
             fetch('https://localhost:44339/api/User/Info', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${isLoggedIn.Token}` // Додаємо токен до запиту
+                    'Authorization': `Bearer ${isLoggedIn.Token}`
                 }
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    setUserInfo(data); // Зберігаємо отриману інформацію у стані компоненту
+                    console.log(data); // Тут ми можемо переглянути дані в консолі
+                    setUserInfo(data); // Тут ми присвоюємо дані змінній userInfo
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                .catch(error => console.error('Error:', error));
         }
     }, [isLoggedIn]);
 
@@ -38,9 +32,8 @@ const Account = (props) => {
             {userInfo && (
                 <div>
                     <h2>Інформація про користувача</h2>
-                    <p>Ім'я: {userInfo.firstname}</p>
-                    <p>Прізвище: {userInfo.lastname}</p>
-                    {/* Додайте інші поля користувача */}
+                    <p>Ім'я: {userInfo.Firstname}</p>
+                    <p>Прізвище: {userInfo.Lastname}</p>
                 </div>
             )}
         </div>
