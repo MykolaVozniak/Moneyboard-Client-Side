@@ -10,6 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.auth.user);
     const [justLoggedIn, setJustLoggedIn] = useState(false);
+    const [error, setError] = useState(null);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -47,14 +48,15 @@ const Login = () => {
                     }
                 });
                 const dataInfo = await responseInfo.json();
-                //console.log(dataInfo);
                 dispatch(setUserInfo(dataInfo))
-                alert('Success');
+                //console.log(dataInfo);
+                //alert('Success');
                 navigate('/workspace');
             } else {
                 const dataError = await responseLogin.json();
-                //console.log(dataError);
-                alert(`Error: ${dataError.Message}`);
+                setError(dataError.error);
+                //console.log(dataError.error);
+                //alert(`Error: ${dataError.Message}`);
             }
         } catch (error) {
             console.error(error);
@@ -69,6 +71,11 @@ const Login = () => {
         <div className='container col-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Authorization</h2>
+                {error && (
+                    <div className='card rounded-2 p-2 mt-2 border-danger'>
+                        <p className='text-danger m-0'>{error}</p>
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div className='mt-3'>
                         <input

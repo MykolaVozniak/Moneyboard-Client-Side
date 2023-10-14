@@ -15,13 +15,13 @@ const Workspace = () => {
     <div className="card p-4 my-4 rounded-4 border-0 shadow-lg">
       <Row className='row align-items-center'>
         <Col>
-        <h2 className='text-center'>Hello, {info.Firstname}</h2>
+          <h2 className='text-center'>Hello, {info.Firstname}</h2>
         </Col>
         <Col>
-        <h2 className='text-center'>Registration</h2>
+          <h2 className='text-center'>Registration</h2>
         </Col>
       </Row>
-      
+
     </div>
 
   );

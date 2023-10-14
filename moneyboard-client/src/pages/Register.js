@@ -15,7 +15,6 @@ const Register = () => {
         password: '',
         cardNumber: '',
         birthDay: '',
-        imageUrl: '',
     });
 
     const handleChange = (e) => {
@@ -46,7 +45,7 @@ const Register = () => {
             setError((prevError) => ({
                 ...prevError,
                 NewErrorKey: ['Unknown error, check the correctness of the entered data.']
-              }));
+            }));
         }
     };
 
@@ -59,7 +58,7 @@ const Register = () => {
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Registration</h2>
                 {error && (
-                    <div className='card rounded-2 p-2 border-danger'>
+                    <div className='card rounded-2 p-2 mt-2 border-danger'>
                         {Object.keys(error).map((key) => (
                             <div key={key}>
                                 <div style={{ whiteSpace: 'pre-line' }} className='text-danger'>
@@ -134,17 +133,6 @@ const Register = () => {
                             placeholder='Birthdate'
                             name='birthDay'
                             value={formData.birthDay}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className='mt-3'>
-                        <input
-                            type='text'
-                            className='form-control'
-                            placeholder='Url image'
-                            name='imageUrl'
-                            value={formData.imageUrl}
                             onChange={handleChange}
                             required
                         />
