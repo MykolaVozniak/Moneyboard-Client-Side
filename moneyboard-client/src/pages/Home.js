@@ -1,9 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Carousel, Button } from 'react-bootstrap';
 import picture from '../resources/logo512.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 
 const Home = () => {
     const isLoggedIn = useSelector((state) => state.auth.user);

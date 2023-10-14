@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import API_URL from '../config';
+import config from '../config';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.auth.user);
+    const [error, setError] = useState(null);
 
     const [formData, setFormData] = useState({
         firstname: '',
@@ -23,24 +24,29 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = API_URL + 'api/Authentication/registration';
         try {
-            const response = await fetch(url, {
+            const response = await fetch(config.API_AUTH_REG, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-
             if (response.ok) {
-                alert('Success!');
+                //alert('Success!');
+                setError(null);
                 navigate('/login');
             } else {
-                alert('Fail!');
+                const dataError = await response.json();
+                setError(dataError.errors);
+                //console.error(dataError.errors);
             }
         } catch (error) {
-            console.error('Помилка:', error);
+            //console.error(error);
+            setError((prevError) => ({
+                ...prevError,
+                NewErrorKey: ['Unknown error, check the correctness of the entered data.']
+              }));
         }
     };
 
@@ -52,6 +58,17 @@ const Register = () => {
         <div className='container col-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Registration</h2>
+                {error && (
+                    <div className='card rounded-2 p-2 border-danger'>
+                        {Object.keys(error).map((key) => (
+                            <div key={key}>
+                                <div style={{ whiteSpace: 'pre-line' }} className='text-danger'>
+                                    {'! ' + error[key].join('\n! ')}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div className='row mt-3'>
                         <div className=' col-6'>

@@ -1,0 +1,45 @@
+if (dataError.errors) {
+                    for (const key in dataError.errors) {
+                        if (dataError.errors.hasOwnProperty(key)) {
+                            const errorMessages = dataError.errors[key];
+                            errorMessages.forEach(errorMessage => {
+                                alert(`Error: ${key}: ${errorMessage}`);
+                                console.error(`${key}: ${errorMessage}`);
+                            });
+                        }
+                    }
+                }
+
+                {errors && (
+                    <div className="error-container">
+                      {Object.keys(errors).map((key) => (
+                        <div key={key} className="error-item">
+                          {`${key}: ${errors[key].join(', ')}`}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {error && (
+                    <ul>
+                        {Object.keys(error).map((key) => (
+                            <li key={key}>
+                                {key}: {error[key].join(', ')}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+
+
+//ideal
+                {error && (
+                    <div>
+                        {Object.keys(error).map((key) => (
+                            <div key={key}>
+                                <div style={{ whiteSpace: 'pre-line' }} className='text-danger'>
+                                    {key}: {error[key].join('\n')}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { setUser, setError } from '../redux/authSlice';
-import API_URL from '../config';
+import { setUser, setUserInfo } from '../redux/authSlice';
+import config from '../config';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector((state) => state.auth.user);
+    const [justLoggedIn, setJustLoggedIn] = useState(false);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -23,35 +24,44 @@ const Login = () => {
         });
     };
 
-    const url = API_URL + 'api/Authentication/login';
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(url, {
+            const responseLogin = await fetch(config.API_AUTH_LOGIN, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
+            if (responseLogin.ok) {
+                setJustLoggedIn(true);
+                const dataLogin = await responseLogin.json();
+                console.log(dataLogin);
+                dispatch(setUser(dataLogin));
 
-            if (response.ok) {
-                const data = await response.json();
-                dispatch(setUser(data));
+                const responseInfo = await fetch(config.API_USER_INFO, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${dataLogin.Token}`
+                    }
+                });
+                const dataInfo = await responseInfo.json();
+                //console.log(dataInfo);
+                dispatch(setUserInfo(dataInfo))
                 alert('Success');
                 navigate('/workspace');
             } else {
-                const errorData = await response.json();
-                dispatch(setError(errorData.error));
-                alert('Fail');
+                const dataError = await responseLogin.json();
+                //console.log(dataError);
+                alert(`Error: ${dataError.Message}`);
             }
         } catch (error) {
             console.error(error);
         }
     };
 
-    if (isLoggedIn) {
+    if (isLoggedIn && !justLoggedIn) {
         return <Navigate to="/" />;
     }
 
@@ -66,10 +76,8 @@ const Login = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-
                             className='form-control'
                             placeholder='Your email'
-
                             required
                         />
                     </div>
@@ -79,10 +87,8 @@ const Login = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-
                             className='form-control'
                             placeholder='Your password'
-
                             required
                         />
                     </div>
