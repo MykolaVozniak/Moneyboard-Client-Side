@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { CaretRight, CaretRightFill, Hexagon, HexagonFill, PencilSquare, PersonAdd } from 'react-bootstrap-icons';
+import { Button, Col, Row } from 'react-bootstrap';
+import { CaretRightFill, Link45deg, PencilSquare} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 
 const Project = () => {
     const [projectInfo, setProjectInfo] = useState(null);
@@ -73,8 +73,13 @@ const Project = () => {
                         </div>
                         <div className='h-100 d-flex justify-content-center'>
                             {projectInfo.IsOwner && (
-                                <Link to='/project/create' className="text-decoration-none text-light mt-auto mx-auto col-8">
-                                    <Button variant='success' className='btn-lg my-4 w-100'><PersonAdd className='me-1 m-0 p-0 pb-2' size={40}></PersonAdd> Add Members</Button>             
+                                <Link to='*' className="text-decoration-none text-light mt-auto mx-auto col-8">
+                                    <Button variant='success' className='btn-lg my-4 w-100'>
+                                        <div className='mt-1'>
+                                        <Link45deg className='me-1 m-0 p-0 pb-1' size={38}></Link45deg>
+                                        <span>Add Members via Link</span>
+                                        </div>  
+                                    </Button>
                                 </Link>
                             )}
                         </div>

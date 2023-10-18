@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
 import config from '../config';
 import { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { HexagonFill } from 'react-bootstrap-icons';
-import { Col, Row } from 'react-bootstrap';
 
 const OwnerProjectsList = () => {
     const [projects, setProjects] = useState([]);

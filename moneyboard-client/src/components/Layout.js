@@ -38,7 +38,7 @@ const Layout = () => {
                 </Nav>
                 <Nav className='col justify-content-end'>
                   <Nav.Link as={Link} to='/account'>My Account</Nav.Link>
-                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                  <Nav.Link onClick={handleLogout} as={Link} to='/'>Logout</Nav.Link>
                 </Nav>
               </>
             ) : (
@@ -59,7 +59,7 @@ const Layout = () => {
 
       <main className='flex-grow-1 bg-light'>
         <div className='py-4 h-100'>
-          <div className='mx-4 text-lg h-100'>
+          <div className='mx-4 my-4 text-lg h-100'>
             <Outlet />
           </div>
         </div>

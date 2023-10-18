@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setUser, setUserInfo } from '../../redux/authSlice';
 import config from '../../config';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.user);
-    const [justLoggedIn, setJustLoggedIn] = useState(false);
     const [error, setError] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -36,7 +34,6 @@ const Login = () => {
                 body: JSON.stringify(formData),
             });
             if (responseLogin.ok) {
-                setJustLoggedIn(true);
                 const dataLogin = await responseLogin.json();
                 console.log(dataLogin);
                 dispatch(setUser(dataLogin));
@@ -62,10 +59,6 @@ const Login = () => {
             console.error(error);
         }
     };
-
-    if (user && !justLoggedIn) {
-        return <Navigate to="/" />;
-    }
 
     return (
         <div className='container col-xs-12 col-md-4 my-4'>

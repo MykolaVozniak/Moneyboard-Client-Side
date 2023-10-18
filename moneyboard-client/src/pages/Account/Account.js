@@ -1,14 +1,8 @@
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 
 const Account = (props) => {
-    const user = useSelector((state) => state.auth.user);
     const info = useSelector((state) => state.auth.info);
-
-    if (!user) {
-        return <Navigate to="/login" />;
-    }
 
     return (
         <div>

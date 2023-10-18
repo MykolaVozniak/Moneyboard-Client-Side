@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
-import { Link } from "react-router-dom";
-import InputMask from 'react-input-mask';
-
 
 const Create = (props) => {
     const user = useSelector((state) => state.auth.user);
@@ -50,13 +46,7 @@ const Create = (props) => {
         } catch (error) {
             console.error('Error:', error);
         }
-
-
     };
-
-    if (!user) {
-        return <Navigate to="/login" />;
-    }
 
     return (
         <div className="container col-4 my-4">

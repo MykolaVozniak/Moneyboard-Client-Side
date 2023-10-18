@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import config from '../../config';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.user);
     const [error, setError] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -48,10 +46,6 @@ const Register = () => {
             }));
         }
     };
-
-    if (user) {
-        return <Navigate to="/" />;
-    }
 
     return (
         <div className='container col-xs-12 col-md-4 my-4'>
