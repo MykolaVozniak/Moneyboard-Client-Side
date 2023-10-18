@@ -43,3 +43,32 @@ if (dataError.errors) {
                         ))}
                     </div>
                 )}
+
+
+//маппер
+                <div className="container col-4 my-4">
+                    <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+                      <h2 className="text-center">Create Project</h2>
+                      <form onSubmit={handleSubmit}>
+                        {Object.keys(formData).map((field) => (
+                          <div className="mb-3" key={field}>
+                            <label htmlFor={field} className="form-label">
+                              {field}
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id={field}
+                              name={field}
+                              value={formData[field]}
+                              onChange={handleChange}
+                              required
+                            />
+                          </div>
+                        ))}
+                        <button type="submit" className="btn btn-primary">
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                  </div>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { setUser, setUserInfo } from '../redux/authSlice';
-import config from '../config';
+import { setUser, setUserInfo } from '../../redux/authSlice';
+import config from '../../config';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isLoggedIn = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user);
     const [justLoggedIn, setJustLoggedIn] = useState(false);
     const [error, setError] = useState(null);
 
@@ -63,17 +63,17 @@ const Login = () => {
         }
     };
 
-    if (isLoggedIn && !justLoggedIn) {
+    if (user && !justLoggedIn) {
         return <Navigate to="/" />;
     }
 
     return (
-        <div className='container col-4 my-4'>
+        <div className='container col-xs-12 col-md-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Authorization</h2>
                 {error && (
                     <div className='card rounded-2 p-2 mt-2 border-danger'>
-                        <p className='text-danger m-0'>{error}</p>
+                        <p className='text-danger m-0'>! {error}</p>
                     </div>
                 )}
                 <form onSubmit={handleSubmit}>

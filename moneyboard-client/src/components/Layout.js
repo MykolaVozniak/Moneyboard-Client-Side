@@ -8,7 +8,7 @@ import logo from '../resources/Logos/MbLogoCompact.png';
 import { logoutUser } from '../redux/authSlice';
 
 const Layout = () => {
-  const isLoggedIn = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -17,7 +17,7 @@ const Layout = () => {
 
   return (
     <div className='d-flex flex-column vh-100'>
-      <header>
+      <header  className='mb-3'>
         <Navbar fixed='top' expand='md' bg='dark' variant='dark' className='shadow px-3'>
           <Navbar.Brand as={Link} to='/'>
             <img
@@ -30,7 +30,7 @@ const Layout = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            {isLoggedIn ? (
+            {user ? (
               <>
                 <Nav className='col justify-content-start'>
                   <Nav.Link as={Link} to='/'>Home</Nav.Link>
@@ -58,14 +58,14 @@ const Layout = () => {
       </header>
 
       <main className='flex-grow-1 bg-light'>
-        <div className='pt-5'>
-          <div className='mx-4 my-3 text-lg'>
+        <div className='py-4 h-100'>
+          <div className='mx-4 text-lg h-100'>
             <Outlet />
           </div>
         </div>
       </main>
 
-      <footer>
+      <footer className='mt-2 '>
         <div className='text-center py-2 text-bg-dark'>
           &copy; 2023 - Moneyboard - <Link to='/privacy'>Privacy</Link>
         </div>

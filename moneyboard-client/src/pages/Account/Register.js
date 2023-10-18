@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import config from '../config';
+import config from '../../config';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const navigate = useNavigate();
-    const isLoggedIn = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user);
     const [error, setError] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -49,12 +49,12 @@ const Register = () => {
         }
     };
 
-    if (isLoggedIn) {
+    if (user) {
         return <Navigate to="/" />;
     }
 
     return (
-        <div className='container col-4 my-4'>
+        <div className='container col-xs-12 col-md-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Registration</h2>
                 {error && (

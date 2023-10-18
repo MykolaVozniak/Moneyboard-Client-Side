@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
-    const isLoggedIn = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user);
     return (
-        <>
+        <div className='h-100'>
             <Container>
-                <Row className='row align-items-center'>
-                    <Col xs={12} md={6}>
+                <Row className='align-items-center my-5 h-100'>
+                    <Col xs={12} md={6} className='h-100'>
                         <p className='fw-bold display-1'>Moneyboard</p>
                         <h4 className='mt-4'>The best solution for money management</h4>
                         <Carousel controls={false}>
@@ -24,7 +24,7 @@ const Home = () => {
                             </Carousel.Item>
                         </Carousel>
                         <div className='mt-4'>
-                            {isLoggedIn ? (
+                            {user ? (
                                 <Link to='/workspace'>
                                     <Button variant='success' className='btn-lg'>Get to work!</Button>
                                 </Link>
@@ -35,7 +35,7 @@ const Home = () => {
                             )}
                         </div>
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className='h-100'>
                         <div className='d-flex justify-content-center mt-4'>
                             <img
                                 src={picture}
@@ -47,7 +47,7 @@ const Home = () => {
                     </Col>
                 </Row>
             </Container>
-        </>
+        </div>
     );
 }
 

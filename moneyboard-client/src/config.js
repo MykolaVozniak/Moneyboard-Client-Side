@@ -12,8 +12,10 @@ const API_USER_INFO = LOCALHOST_URL + USER + 'info';
 const API_USER_EDIT = LOCALHOST_URL + USER + 'edit';
 
 const API_PROJECT_CREATE = LOCALHOST_URL + PROJECT + 'create';
+const API_PROJECT_OWNER_LIST = LOCALHOST_URL + PROJECT + 'owner';
+const API_PROJECT_MEMBER_LIST = LOCALHOST_URL + PROJECT + 'member';
 
-export default {
+const config = {
     LOCALHOST_URL,
     API_AUTH_REG,
     API_AUTH_LOGIN,
@@ -21,4 +23,8 @@ export default {
     API_USER_INFO,
     API_USER_EDIT,
     API_PROJECT_CREATE,
+    API_PROJECT_OWNER_LIST,
+    API_PROJECT_MEMBER_LIST
 };
+
+export default config;

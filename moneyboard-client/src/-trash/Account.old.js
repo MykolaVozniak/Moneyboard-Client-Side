@@ -3,15 +3,15 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router";
 
 const Account = (props) => {
-    const isLoggedIn = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user);
     const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (user) {
             fetch('https://localhost:44339/api/User/Info', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${isLoggedIn.Token}`
+                    'Authorization': `Bearer ${user.Token}`
                 }
             })
                 .then(response => response.json())
@@ -21,9 +21,9 @@ const Account = (props) => {
                 })
                 .catch(error => console.error('Error:', error));
         }
-    }, [isLoggedIn]);
+    }, [user]);
 
-    if (!isLoggedIn) {
+    if (!user) {
         return <Navigate to="/login" />;
     }
 

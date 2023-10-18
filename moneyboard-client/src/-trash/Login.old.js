@@ -10,7 +10,7 @@ const Login = () => {
 
     const { login } = useAuth();
 
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [user, setLoggedIn] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ const Login = () => {
         }
     };
 
-    if (isLoggedIn) {
+    if (user) {
         setTimeout(() => {
             window.location.reload(); // cringe
         }, 1);
