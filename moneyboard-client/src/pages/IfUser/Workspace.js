@@ -17,7 +17,7 @@ const Workspace = () => {
                   <h2>My Projects</h2>
                 </Col>
                 <Col className='text-end'>
-                  <Link to='/project/create' className="text-decoration-none text-light">
+                  <Link to='/project/create/step/1' className="text-decoration-none text-light">
                     <IconForCreate size={33}></IconForCreate>
                   </Link>
                 </Col>

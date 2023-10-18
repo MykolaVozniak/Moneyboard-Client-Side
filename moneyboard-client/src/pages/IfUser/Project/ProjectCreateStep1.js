@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import API_PROJECT_CREATE from "../../../config"
+import { Button} from "react-bootstrap";
+import {Link} from 'react-router-dom';
 
-const ProjectCreate = (props) => {
+const ProjectCreateStep1 = (props) => {
     const user = useSelector((state) => state.auth.user);
 
     const [formData, setFormData] = useState({
@@ -58,6 +60,7 @@ const ProjectCreate = (props) => {
                         <input
                             type="text"
                             className="form-control"
+                            placeholder='Project Name'
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -65,9 +68,21 @@ const ProjectCreate = (props) => {
                         />
                     </div>
                     <div className="mb-3">
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder='Choose the currency of your project'
+                                name="currency"
+                                value={formData.currency}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    <div className="mb-3">
                         <input
                             type="number"
                             className="form-control"
+                            placeholder="Choose what the minimum salary will be"
                             name="baseSalary"
                             value={formData.baseSalary}
                             onChange={handleChange}
@@ -75,6 +90,7 @@ const ProjectCreate = (props) => {
                         />
                     </div>
                     <div className="mb-3">
+                        <p>Salary date is</p>
                         <input
                             type="date"
                             className="form-control"
@@ -84,7 +100,19 @@ const ProjectCreate = (props) => {
                             required
                         />
                     </div>
-                    <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+                    <div className="mb-3">
+                        <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Just put 0 here"
+                            name="projectPoinPercent"
+                            value={formData.projectPoinPercent}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="card p-2 my-3 rounded-4 border-0 bg-success">
+                        <h5 className='text-light text-center'>YOUR CARD DETAILS</h5>
                         <div className="mb-3">
                             <input
                                 type="number"
@@ -126,34 +154,16 @@ const ProjectCreate = (props) => {
                                 required
                             />
                         </div>
-                        <div className="mb-3">
-                            <input
-                                type="number"
-                                className="form-control"
-                                name="currency"
-                                value={formData.currency}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
                     </div>
-                    <div className="mb-3">
-                        <input
-                            type="number"
-                            className="form-control"
-                            name="projectPoinPercent"
-                            value={formData.projectPoinPercent}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary">
-                        Submit
-                    </button>
+                    <Link to='/project/create/step/2' className="text-decoration-none text-light mt-auto mx-auto col-8">
+                    <Button type="submit" className="btn-primary">
+                        Next
+                    </Button>
+                    </Link>
                 </form>
             </div>
         </div>
     );
 };
 
-export default ProjectCreate;
+export default ProjectCreateStep1;
