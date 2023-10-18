@@ -46,7 +46,7 @@ const Login = () => {
                 });
                 const dataInfo = await responseInfo.json();
                 dispatch(setUserInfo(dataInfo))
-                //console.log(dataInfo);
+                console.log(dataInfo);
                 //alert('Success');
                 navigate('/workspace');
             } else {

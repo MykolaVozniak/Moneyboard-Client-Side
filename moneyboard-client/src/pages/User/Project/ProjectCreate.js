@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import API_PROJECT_CREATE from "../../../config"
 
-const Create = (props) => {
+const ProjectCreate = (props) => {
     const user = useSelector((state) => state.auth.user);
 
     const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const Create = (props) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://localhost:44339/api/Project/create', {
+            const response = await fetch(API_PROJECT_CREATE, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json-patch+json',
@@ -155,4 +156,4 @@ const Create = (props) => {
     );
 };
 
-export default Create;
+export default ProjectCreate;

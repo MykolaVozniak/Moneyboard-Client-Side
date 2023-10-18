@@ -3,20 +3,20 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Layout from './components/Layout';
-import Home from './pages/Home';
-import Privacy from './pages/Privacy';
-import NotFound from './pages/NotFound';
+import Home from './pages/Public/Home';
+import Privacy from './pages/Public/Privacy';
+import NotFound from './pages/Public/NotFound';
 
-import Workspace from './pages/Workspace';
+import Workspace from './pages/User/Workspace';
 
-import Register from './pages/Account/Register';
-import Login from './pages/Account/Login';
-import Account from './pages/Account/Account';
-import AccountEdit from './pages/Account/AccountEdit';
+import Register from './pages/NotUser/Register';
+import Login from './pages/NotUser/Login';
+import Account from './pages/User/Account/Account';
+import AccountEdit from './pages/User/Account/AccountEdit';
 
-import Create from './pages/Project/Create';
-import Project from './pages/Project/Project';
-import ProjectEdit from './pages/Project/ProjectEdit';
+import ProjectCreate from './pages/User/Project/ProjectCreate';
+import ProjectId from './pages/User/Project/ProjectId';
+import ProjectEdit from './pages/User/Project/ProjectEdit';
 
 const App = () => {
   const user = useSelector((state) => state.auth.user);
@@ -40,8 +40,8 @@ const App = () => {
                 <Route path='/account' element={<Account />} />
                 <Route path='/account/edit' element={<AccountEdit />} />
                 <Route path='/workspace' element={<Workspace />} />
-                <Route path='/project/create' element={<Create />} />
-                <Route path="/project/:projectId" element={<Project />} />
+                <Route path='/project/create' element={<ProjectCreate />} />
+                <Route path="/project/:projectId" element={<ProjectId />} />
                 <Route path='/project/edit' element={<ProjectEdit />} />
               </>
             )}

@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link} from 'react-router-dom';
 import { PlusSquare as IconForCreate } from 'react-bootstrap-icons';
-import OwnerProjectsList from '../components/OwnerProjectsList';
-import MemberProjectsList from '../components/MemberProjectsList';
+import OwnerProjectsList from '../../components/OwnerProjectsList';
+import MemberProjectsList from '../../components/MemberProjectsList';
 
 const Workspace = () => {
   return (
@@ -18,7 +18,7 @@ const Workspace = () => {
                 </Col>
                 <Col className='text-end'>
                   <Link to='/project/create' className="text-decoration-none text-light">
-                    <IconForCreate size={35}></IconForCreate>
+                    <IconForCreate size={33}></IconForCreate>
                   </Link>
                 </Col>
               </Row>

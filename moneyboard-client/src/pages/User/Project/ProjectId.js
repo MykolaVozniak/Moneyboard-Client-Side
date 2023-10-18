@@ -4,7 +4,7 @@ import { CaretRightFill, Link45deg, PencilSquare} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link} from 'react-router-dom';
 
-const Project = () => {
+const ProjectId = () => {
     const [projectInfo, setProjectInfo] = useState(null);
     const user = useSelector((state) => state.auth.user);
     const { projectId } = useParams();
@@ -38,8 +38,8 @@ const Project = () => {
     }
 
     return (
-        <div className='h-100'>
-            <Row className='row align-items-center my-4 h-100'>
+        <>
+            <Row className='row align-items-center h-100'>
                 <Col xs={12} md={4} className="h-100">
                     <div className="card rounded-4 border-0 shadow-lg bg-dark text-light  h-100">
                         <div className='px-5 pt-4'>
@@ -50,7 +50,7 @@ const Project = () => {
                                 {projectInfo.IsOwner && (
                                     <Col xs={3} className='text-end'>
                                         <Link to='/project/create' className="text-decoration-none text-light">
-                                            <PencilSquare size={35}></PencilSquare>
+                                            <PencilSquare size={33}></PencilSquare>
                                         </Link>
                                     </Col>
                                 )}
@@ -66,7 +66,7 @@ const Project = () => {
                                 //{ label: 'Is Owner', value: projectInfo.IsOwner ? 'Yes' : 'No' },
                             ].map(item => (
                                 <div key={item.label} className='ms-0 m-1 mt-2'>
-                                    <CaretRightFill className='me-1 pb-2' size={35}></CaretRightFill>
+                                    <CaretRightFill className='me-1 pb-2' size={25}></CaretRightFill>
                                     <h5 className='fw-semibold d-inline'>{`${item.label}: ${item.value}`}</h5>
                                 </div>
                             ))}
@@ -89,8 +89,8 @@ const Project = () => {
                     <div className="card p-4 rounded-4 border-0 shadow-lg h-100"></div>
                 </Col>
             </Row>
-        </div>
+        </>
     );
 };
 
-export default Project;
+export default ProjectId;

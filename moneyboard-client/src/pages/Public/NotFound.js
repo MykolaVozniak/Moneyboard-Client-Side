@@ -1,10 +1,10 @@
 import React from 'react';
-import picture from '../resources/Fillers/frogCute.png';
+import picture from '../../resources/Fillers/frogCute.png';
 import { Col, Row } from 'react-bootstrap';
 
 const NotFound = () => {
     return (
-        <div className='container my-5 d-flex align-items-center justify-content-center'>
+        <div className='container d-flex align-items-center justify-content-center'>
             <Row className='align-items-center my-4 h-100'>
                 <Col xs={12} md={6} className='d-flex justify-content-center mt-4'>
                     <img
