@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser, setUserInfo } from '../../redux/authSlice';
 import config from '../../config';
 import { Link } from 'react-router-dom';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Login = () => {
             });
             if (responseLogin.ok) {
                 const dataLogin = await responseLogin.json();
-                console.log(dataLogin);
+                //console.log(dataLogin);
                 dispatch(setUser(dataLogin));
 
                 const responseInfo = await fetch(config.API_USER_INFO, {
@@ -45,8 +46,8 @@ const Login = () => {
                     }
                 });
                 const dataInfo = await responseInfo.json();
-                dispatch(setUserInfo(dataInfo))
-                console.log(dataInfo);
+                dispatch(setUserInfo(dataInfo));
+                //console.log(dataInfo);
                 //alert('Success');
                 navigate('/workspace');
             } else {
@@ -61,7 +62,7 @@ const Login = () => {
     };
 
     return (
-        <div className='container col-xs-12 col-md-4 my-4'>
+        <div className='container col-sm-12 col-md-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Authorization</h2>
                 {error && (
@@ -70,8 +71,9 @@ const Login = () => {
                     </div>
                 )}
                 <form onSubmit={handleSubmit}>
-                    <div className='mt-3'>
-                        <input
+
+                    <InputGroup className="mb-3">
+                        <FormControl
                             type="text"
                             name="email"
                             value={formData.email}
@@ -80,9 +82,10 @@ const Login = () => {
                             placeholder='Your email'
                             required
                         />
-                    </div>
-                    <div className='mt-3'>
-                        <input
+                    </InputGroup>
+
+                    <InputGroup className="mb-3">
+                        <FormControl
                             type="password"
                             name="password"
                             value={formData.password}
@@ -91,9 +94,10 @@ const Login = () => {
                             placeholder='Your password'
                             required
                         />
-                    </div>
+                    </InputGroup>
+
                     <div className='d-flex justify-content-center mt-4'>
-                        <button type='submit' className='btn btn-primary col-6'>Sign In</button>
+                        <Button type='submit' className='btn-primary col-8'>Submit</Button>
                     </div>
                 </form>
                 <div className='mt-3'>

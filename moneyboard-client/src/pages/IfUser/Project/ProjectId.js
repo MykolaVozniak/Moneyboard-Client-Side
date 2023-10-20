@@ -3,6 +3,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { CaretRightFill, Link45deg, PencilSquare} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link} from 'react-router-dom';
+import config from "../../../config"
 
 const ProjectId = () => {
     const [projectInfo, setProjectInfo] = useState(null);
@@ -12,13 +13,13 @@ const ProjectId = () => {
     useEffect(() => {
         const fetchProjectInfo = async () => {
             try {
-                const response = await fetch(`https://localhost:44339/api/Project/info/${projectId}`, {
+                const response = await fetch(`${config.API_PROJECT_INFO}${projectId}`, {
                     headers: {
                         'accept': '*/*',
                         'Authorization': `Bearer ${user.Token}`
                     }
                 });
-                console.log(projectId);
+                //console.log(config.API_PROJECT_INFO+projectId);
                 if (response.ok) {
                     const data = await response.json();
                     setProjectInfo(data);
@@ -49,7 +50,7 @@ const ProjectId = () => {
                                 </Col>
                                 {projectInfo.IsOwner && (
                                     <Col xs={3} className='text-end'>
-                                        <Link to='/project/create' className="text-decoration-none text-light">
+                                        <Link to='*' className="text-decoration-none text-light">
                                             <PencilSquare size={33}></PencilSquare>
                                         </Link>
                                     </Col>

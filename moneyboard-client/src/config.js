@@ -14,6 +14,7 @@ const API_USER_EDIT = LOCALHOST_URL + USER + 'edit';
 const API_PROJECT_CREATE = LOCALHOST_URL + PROJECT + 'create';
 const API_PROJECT_OWNER_LIST = LOCALHOST_URL + PROJECT + 'owner';
 const API_PROJECT_MEMBER_LIST = LOCALHOST_URL + PROJECT + 'member';
+const API_PROJECT_INFO = LOCALHOST_URL + PROJECT + 'info' + '/';
 
 const config = {
     LOCALHOST_URL,
@@ -24,7 +25,8 @@ const config = {
     API_USER_EDIT,
     API_PROJECT_CREATE,
     API_PROJECT_OWNER_LIST,
-    API_PROJECT_MEMBER_LIST
+    API_PROJECT_MEMBER_LIST,
+    API_PROJECT_INFO
 };
 
 export default config;

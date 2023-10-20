@@ -1,11 +1,14 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PlusSquare as IconForCreate } from 'react-bootstrap-icons';
 import OwnerProjectsList from '../../components/OwnerProjectsList';
 import MemberProjectsList from '../../components/MemberProjectsList';
+import { useSelector } from 'react-redux';
 
 const Workspace = () => {
+  const isProjectListExist = useSelector((state) => state.auth.isProjectsExist);
+
   return (
     <>
       <Row className='row align-items-center h-100'>
@@ -24,9 +27,14 @@ const Workspace = () => {
               </Row>
             </div>
             <hr className='mx-4' />
-            <div className='px-5 pb-3'>
+            <div className='px-5 pb-5 h-100'>
               <OwnerProjectsList />
               <MemberProjectsList />
+              {!isProjectListExist && (
+                <div className='h-100 d-flex align-items-center justify-content-center'>
+                  <h5 className="text-light fst-italic text-opacity-50">You are not involved in any project yet...</h5>
+                </div>
+              )}
             </div>
           </div>
         </Col>

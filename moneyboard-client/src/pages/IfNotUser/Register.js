@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import config from '../../config';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -48,7 +49,7 @@ const Register = () => {
     };
 
     return (
-        <div className='container col-xs-12 col-md-4 my-4'>
+        <div className='container col-sm-12 col-md-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
                 <h2 className='text-center'>Registration</h2>
                 {error && (
@@ -64,75 +65,77 @@ const Register = () => {
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className='row mt-3'>
-                        <div className=' col-6'>
-                            <input
-                                type='text'
-                                className='form-control'
-                                placeholder='Firstname'
-                                name='firstname'
-                                value={formData.firstname}
-                                onChange={handleChange}
-                                required
-                            />
+                        <div className='col-6'>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    type='text'
+                                    placeholder='Firstname'
+                                    name='firstname'
+                                    value={formData.firstname}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </InputGroup>
                         </div>
                         <div className='col-6'>
-                            <input
-                                type='text'
-                                className='form-control'
-                                placeholder='Lastname'
-                                name='lastname'
-                                value={formData.lastname}
-                                onChange={handleChange}
-                                required
-                            />
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    type='text'
+                                    placeholder='Lastname'
+                                    name='lastname'
+                                    value={formData.lastname}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </InputGroup>
                         </div>
                     </div>
-                    <div className='mt-3'>
-                        <input
+
+                    <InputGroup className="mb-3">
+                        <FormControl
                             type='email'
-                            className='form-control'
                             placeholder='Email'
                             name='email'
                             value={formData.email}
                             onChange={handleChange}
                             required
                         />
-                    </div>
-                    <div className='mt-3'>
-                        <input
+                    </InputGroup>
+
+                    <InputGroup className="mb-3">
+                        <FormControl
                             type='password'
-                            className='form-control'
                             placeholder='Password'
                             name='password'
                             value={formData.password}
                             onChange={handleChange}
                             required
                         />
-                    </div>
-                    <div className='mt-3'>
-                        <input
+                    </InputGroup>
+
+                    <InputGroup className="mb-3">
+                        <FormControl
                             type='text'
-                            className='form-control'
                             placeholder='Payment card number'
                             name='cardNumber'
                             value={formData.cardNumber}
                             onChange={handleChange}
                             required
                         />
-                    </div>
-                    <div className='mt-3'>
-                        <input
+                    </InputGroup>
+
+                    <InputGroup className="mb-3">
+                    <InputGroup.Text>Birthdate</InputGroup.Text>
+                        <FormControl
                             type='date'
-                            className='form-control'
-                            placeholder='Birthdate'
                             name='birthDay'
                             value={formData.birthDay}
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </InputGroup>
                     <div className='d-flex justify-content-center mt-4'>
-                        <button type='submit' className='btn btn-primary col-8'>Submit</button>
+                        <Button type='submit' className='btn-primary col-8'>Submit</Button>
                     </div>
                 </form>
                 <div className='mt-3'>

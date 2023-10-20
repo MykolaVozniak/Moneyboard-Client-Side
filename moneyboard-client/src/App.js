@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './styles/App.css';
 
 import Layout from './components/Layout';
 import Home from './pages/Public/Home';

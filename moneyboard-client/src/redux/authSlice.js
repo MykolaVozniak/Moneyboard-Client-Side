@@ -5,6 +5,7 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     info: null,
+    isProjectsExist: false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -13,12 +14,16 @@ const authSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
       state.info = null;
+      state.isProjectsExist = false;
     },
     setUserInfo: (state, action) => {
       state.info = action.payload;
     },
+    setProjectsExist: (state, action) => {
+      state.isProjectsExist = action.payload;
+    },
   },
 });
 
-export const { setUser, setUserInfo, logoutUser } = authSlice.actions;
+export const { setUser, setUserInfo, logoutUser, setProjectsExist } = authSlice.actions;
 export default authSlice.reducer;

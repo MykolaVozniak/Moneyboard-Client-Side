@@ -3,10 +3,13 @@ import config from '../config';
 import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 import { HexagonFill } from 'react-bootstrap-icons';
+import { useDispatch} from 'react-redux';
+import { setProjectsExist } from '../redux/authSlice';
 
 const MemberProjectsList = () => {
     const [projects, setProjects] = useState([]);
     const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -17,10 +20,10 @@ const MemberProjectsList = () => {
                         'Authorization': `Bearer ${user.Token}`
                     }
                 });
-
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
+                    
                     //console.log(data);
                 } else {
                     console.error('Error', response.statusText);
@@ -32,6 +35,10 @@ const MemberProjectsList = () => {
 
         fetchProjects();
     }, []);
+
+    if (projects.length !==0) {
+        dispatch(setProjectsExist(true));
+    }
 
     return (
         <>
