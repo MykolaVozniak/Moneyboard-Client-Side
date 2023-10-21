@@ -3,6 +3,7 @@ const LOCALHOST_URL = 'https://localhost:44339/';
 const AUTH = 'api/Authentication/';
 const PROJECT = 'api/Project/';
 const USER = 'api/User/';
+const ROLE = 'api/Role/';
 
 const API_AUTH_REG = LOCALHOST_URL + AUTH + 'registration';
 const API_AUTH_LOGIN = LOCALHOST_URL + AUTH + 'login';
@@ -17,6 +18,9 @@ const API_PROJECT_MEMBER_LIST = LOCALHOST_URL + PROJECT + 'member';
 const API_PROJECT_INFO = LOCALHOST_URL + PROJECT + 'info' + '/';
 const API_PROJECT_ADD_MEMBER =  LOCALHOST_URL + PROJECT + 'add-member' + '/'
 
+const API_ROLE_PROJECT = LOCALHOST_URL + ROLE + 'project' + '/'
+const API_ROLE_EDIT =  LOCALHOST_URL + ROLE + 'edit'
+
 const config = {
     LOCALHOST_URL,
     API_AUTH_REG,
@@ -28,7 +32,9 @@ const config = {
     API_PROJECT_OWNER_LIST,
     API_PROJECT_MEMBER_LIST,
     API_PROJECT_INFO,
-    API_PROJECT_ADD_MEMBER
+    API_PROJECT_ADD_MEMBER,
+    API_ROLE_PROJECT,
+    API_ROLE_EDIT
 };
 
 export default config;

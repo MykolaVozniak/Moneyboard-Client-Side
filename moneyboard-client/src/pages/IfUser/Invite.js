@@ -4,12 +4,8 @@ import { useNavigate, useParams } from 'react-router';
 import config from "../../config";
 
 const Invite = () => {
-
     const [error, setError] = useState(null);
-
-
     const navigate = useNavigate();
-
 
     const [projectInfo, setProjectInfo] = useState(null);
     const user = useSelector((state) => state.auth.user);

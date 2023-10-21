@@ -1,8 +1,0 @@
-.custom-select {
-    height: 200px; /* Встановлюємо висоту списку */
-    overflow-y: auto; /* Додаємо прокрутку, якщо список перевищує цю висоту */
-  }
-
-  .white-placeholder::placeholder {
-    color: #FAFAFA; /* Вкажіть ваш колір тут */
-  }
