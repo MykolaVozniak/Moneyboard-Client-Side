@@ -4,6 +4,7 @@ import { CaretRightFill, Link45deg, PencilSquare} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link} from 'react-router-dom';
 import config from "../../../config"
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 const ProjectId = () => {
     const [projectInfo, setProjectInfo] = useState(null);
@@ -19,7 +20,6 @@ const ProjectId = () => {
                         'Authorization': `Bearer ${user.Token}`
                     }
                 });
-                //console.log(config.API_PROJECT_INFO+projectId);
                 if (response.ok) {
                     const data = await response.json();
                     setProjectInfo(data);
@@ -74,14 +74,16 @@ const ProjectId = () => {
                         </div>
                         <div className='h-100 d-flex justify-content-center'>
                             {projectInfo.IsOwner && (
-                                <Link to='*' className="text-decoration-none text-light mt-auto mx-auto col-8">
+                                <div className=" mt-auto mx-auto col-8">
+                                    <CopyToClipboard text="SecretText">
                                     <Button variant='success' className='btn-lg my-4 w-100'>
                                         <div className='mt-1'>
                                         <Link45deg className='me-1 m-0 p-0 pb-1' size={38}></Link45deg>
                                         <span>Add Members via Link</span>
                                         </div>  
                                     </Button>
-                                </Link>
+                                    </CopyToClipboard>
+                                </div>
                             )}
                         </div>
                     </div>

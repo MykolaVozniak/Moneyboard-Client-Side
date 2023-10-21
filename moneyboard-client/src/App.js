@@ -20,6 +20,8 @@ import ProjectCreateStep2 from './pages/IfUser/Project/ProjectCreateStep2';
 import ProjectId from './pages/IfUser/Project/ProjectId';
 import ProjectEdit from './pages/IfUser/Project/ProjectEdit';
 
+import Invite from './pages/IfUser/Invite'
+
 
 const App = () => {
   const user = useSelector((state) => state.auth.user);
@@ -36,6 +38,7 @@ const App = () => {
               <>
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/invite/:projectId' element={<Login />} />
               </>
             )}
             {user && (
@@ -43,10 +46,11 @@ const App = () => {
                 <Route path='/account' element={<Account />} />
                 <Route path='/account/edit' element={<AccountEdit />} />
                 <Route path='/workspace' element={<Workspace />} />
-                <Route path='/project/create/step/1' element={<ProjectCreateStep1 />} />
-                <Route path='/project/create/step/2' element={<ProjectCreateStep2 />} />
+                <Route path='/project/create/0' element={<ProjectCreateStep1 />} />
+                <Route path='/project/create/:projectId' element={<ProjectCreateStep2 />} />
                 <Route path="/project/:projectId" element={<ProjectId />} />
                 <Route path='/project/edit' element={<ProjectEdit />} />
+                <Route path='/invite/:projectId' element={<Invite />} />
               </>
             )}
           </Route>

@@ -12,7 +12,7 @@ const Account = (props) => {
 
                     <div className='row mt-3'>
                         <div className='col-4 text-end card p-2 border-0'>
-                            <p className="m-0 fw-bold">Firstname:</p>
+                            <p className="m-0 fw-bold">First Name:</p>
                         </div>
                         <div className='col-7 text-center card rounded-2 p-2 mx-2 border-info'>
                             <p className="m-0">{info.Firstname}</p>
@@ -20,7 +20,7 @@ const Account = (props) => {
                     </div>
                     <div className='row mt-3'>
                         <div className='col-4 text-end card p-2 border-0'>
-                            <p className="m-0 fw-bold">Lastname:</p>
+                            <p className="m-0 fw-bold">Last Name:</p>
                         </div>
                         <div className='col-7 text-center card rounded-2 p-2 mx-2 border-info'>
                             <p className="m-0">{info.Lastname}</p>

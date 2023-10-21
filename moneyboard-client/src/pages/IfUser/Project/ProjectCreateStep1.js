@@ -18,7 +18,6 @@ const ProjectCreateStep1 = (props) => {
         expirationDate: '',
         money: '',
         currency: '',
-        projectPoinPercent: '',
     });
 
     const handleChange = (e) => {
@@ -41,16 +40,19 @@ const ProjectCreateStep1 = (props) => {
             });
 
             if (response.ok) {
-                //alert('Success!');
+                const dataInfo = await response.json();
+                console.log(dataInfo.ProjectId);
                 setError(null);
-                navigate('/project/create/step/2');
+                navigate(`/project/create/${dataInfo.ProjectId}`);
             } else {
                 const dataError = await response.json();
                 setError(dataError.errors);
-                //console.error(dataError.errors);
+                console.error(dataError.errors);
+                console.log(formData);
             }
         } catch (error) {
-            //console.error(error);
+            console.error(error);
+            console.log(formData);
             setError((prevError) => ({
                 ...prevError,
                 NewErrorKey: ['Unknown error, check the correctness of the entered data.']
@@ -105,6 +107,7 @@ const ProjectCreateStep1 = (props) => {
                                     className="form-control"
                                     size="3" aria-label="size 3 select example"
                                 >
+                                    <option value="">Select...</option>
                                     <option value="USD">USD</option>
                                     <option value="EUR">EUR</option>
                                     <option value="UAH">UAH</option>
@@ -195,7 +198,7 @@ const ProjectCreateStep1 = (props) => {
                                     </Col>
                                 </Row>
                             </div>
-                            <div className='d-flex justify-content-center my-3 px-4'>
+                            <div className='d-flex justify-content-center mt-3 mb-4 px-4'>
                                 <InputGroup>
                                     <InputGroup.Text className='bg-success-subtle'>Available money:</InputGroup.Text>
                                     <FormControl
@@ -209,9 +212,9 @@ const ProjectCreateStep1 = (props) => {
                                     />
                                     <InputGroup.Text className='bg-success-subtle'>
                                         {!formData.currency && (
-                                            <span>USD</span>
+                                            <span>???</span>
                                         )}
-                                        {formData.currency}
+                                         <span>{formData.currency}</span>
                                     </InputGroup.Text>
                                 </InputGroup>
                             </div>
