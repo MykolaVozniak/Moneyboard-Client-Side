@@ -9,6 +9,10 @@ import { useSelector } from 'react-redux';
 const Workspace = () => {
   const isProjectListExist = useSelector((state) => state.auth.isProjectsExist);
 
+  if (!<OwnerProjectsList /> && !<MemberProjectsList />) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Row className='row align-items-center h-100'>

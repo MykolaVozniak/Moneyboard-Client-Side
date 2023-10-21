@@ -52,7 +52,7 @@ const MemberProjectsList = () => {
                                     <Link to={`/project/${project.ProjectId}`} className="text-decoration-none text-light">
                                         <div className='ms-0 m-1'>
                                             <HexagonFill className='me-1 pb-1' size={23}></HexagonFill>
-                                            <span className='fw-semibold'>A{project.Name}</span>
+                                            <span className='fw-semibold'>{project.Name}</span>
                                         </div>
                                     </Link>
                                 </li>

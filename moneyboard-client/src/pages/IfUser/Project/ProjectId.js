@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
-import { CaretRightFill, Link45deg, PencilSquare} from 'react-bootstrap-icons';
+import { Button, Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { CaretRightFill, Link45deg, PencilSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
-import { useParams, Link} from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import config from "../../../config"
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -10,6 +10,16 @@ const ProjectId = () => {
     const [projectInfo, setProjectInfo] = useState(null);
     const user = useSelector((state) => state.auth.user);
     const { projectId } = useParams();
+    const invitePath = `${window.location.origin}/invite/${projectId}` ;
+
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+
+    const handleCopyClick = () => {
+        setTooltipVisible(true);
+        setTimeout(() => {
+            setTooltipVisible(false);
+        }, 2000);
+    };
 
     useEffect(() => {
         const fetchProjectInfo = async () => {
@@ -75,14 +85,24 @@ const ProjectId = () => {
                         <div className='h-100 d-flex justify-content-center'>
                             {projectInfo.IsOwner && (
                                 <div className=" mt-auto mx-auto col-8">
-                                    <CopyToClipboard text="SecretText">
-                                    <Button variant='success' className='btn-lg my-4 w-100'>
-                                        <div className='mt-1'>
-                                        <Link45deg className='me-1 m-0 p-0 pb-1' size={38}></Link45deg>
-                                        <span>Add Members via Link</span>
-                                        </div>  
-                                    </Button>
-                                    </CopyToClipboard>
+                                        <OverlayTrigger
+                                            placement="top"
+                                            overlay={<Tooltip id="tooltip-copied">Copied Successfully!</Tooltip>}
+                                            show={tooltipVisible}
+                                        >
+                                            <CopyToClipboard text={invitePath}>
+                                            <Button
+                                                variant='success'
+                                                className='btn-lg my-4 w-100'
+                                                onClick={handleCopyClick}
+                                            >
+                                                <div className='mt-1'>
+                                                    <Link45deg className='me-1 m-0 p-0 pb-1' size={38}></Link45deg>
+                                                    <span>Add Members via Link</span>
+                                                </div>
+                                            </Button>
+                                            </CopyToClipboard>
+                                        </OverlayTrigger>
                                 </div>
                             )}
                         </div>

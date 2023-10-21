@@ -48,10 +48,11 @@ const Invite = () => {
                     'Authorization': `Bearer ${user.Token}`,
                 },
             });
+            console.log(`${config.API_PROJECT_ADD_MEMBER}${projectId}`);
 
             if (response.ok) {
                 setError(null);
-                navigate(`/workspace`);
+                navigate(`/project/${projectId}`);
             } else {
                 const dataError = await response.json();
                 setError(dataError.error);
@@ -78,7 +79,7 @@ const Invite = () => {
         <p>Базова зарплата: {projectInfo.BaseSalary}</p>
         <p>Дата виплати зарплати: {projectInfo.SalaryDate}</p>
           <button onClick={handleApply}>Apply</button>
-          <button >Ignore</button>
+          <button >Ignore</button> {/* to workspace */}
         
       </div>
     );
