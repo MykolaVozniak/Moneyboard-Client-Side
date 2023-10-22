@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUser, setUserInfo } from '../../redux/authSlice';
 import config from '../../config';
 import { Link } from 'react-router-dom';
-import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -62,49 +62,54 @@ const Login = () => {
     };
 
     return (
-        <div className='container col-sm-12 col-md-4 my-4'>
-            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
-                <h2 className='text-center'>Authorization</h2>
-                {error && (
-                    <div className='card rounded-2 p-2 mt-2 border-danger'>
-                        <p className='text-danger m-0'>! {error}</p>
-                    </div>
-                )}
-                <form onSubmit={handleSubmit}>
-
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            type="text"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className='form-control'
-                            placeholder='Your email'
-                            required
-                        />
-                    </InputGroup>
-
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className='form-control'
-                            placeholder='Your password'
-                            required
-                        />
-                    </InputGroup>
-
-                    <div className='d-flex justify-content-center mt-4'>
-                        <Button type='submit' className='btn-primary col-8'>Submit</Button>
-                    </div>
-                </form>
-                <div className='mt-3'>
-                    <p className='text-center'>Don't have account? <Link to='/register'>Sign Up</Link></p>
-                </div>
+        <>
+            <div className='h-100'>
+                <Container className='h-100'>
+                    <Row>
+                        <Col xs={12} className='d-flex align-items-center justify-content-center'>
+                            <Container className='bg-white border-0 rounded-4 shadow-lg px-5 py-4 mt-5 col-sm-12 col-md-4'>
+                                <h2 className='text-center'>Authorization</h2>
+                                {error && (
+                                    <Card className='rounded-2 p-2 mt-4 border-danger'>
+                                        <p className='text-danger m-0'>! {error}</p>
+                                    </Card>
+                                )}
+                                <Form onSubmit={handleSubmit}>
+                                    <InputGroup className="mt-4">
+                                        <FormControl
+                                            type="email"
+                                            name="email"
+                                            placeholder='Your email'
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            className='form-control'
+                                            required
+                                        />
+                                    </InputGroup>
+                                    <InputGroup className="mt-3">
+                                        <FormControl
+                                            type="password"
+                                            name="password"
+                                            placeholder='Your password'
+                                            value={formData.password}
+                                            onChange={handleChange}
+                                            className='form-control'
+                                            required
+                                        />
+                                    </InputGroup>
+                                    <div className='d-flex justify-content-center mt-4'>
+                                        <Button type='submit' variant="primary" className='col-8'>Submit</Button>
+                                    </div>
+                                </Form>
+                                <div className='mt-3'>
+                                    <p className='text-center mb-2'>Don't have account? <Link to='/register'>Sign Up</Link></p>
+                                </div>
+                            </Container>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
-        </div>
+        </>
     );
 }
 
