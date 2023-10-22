@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import Home from './pages/Public/Home';
 import Privacy from './pages/Public/Privacy';
 import NotFound from './pages/Public/NotFound';
+import UltrapointsInfo from './pages/Public/UltrapointsInfo';
 
 import Workspace from './pages/IfUser/Workspace';
 
@@ -23,6 +24,7 @@ import ProjectEdit from './pages/IfUser/Project/ProjectEdit';
 import Invite from './pages/IfUser/Invite'
 
 
+
 const App = () => {
   const user = useSelector((state) => state.auth.user);
 
@@ -33,6 +35,7 @@ const App = () => {
           <Route path='/' element={<Layout />}>
             <Route path='/' element={<Home />} />
             <Route path='/privacy' element={<Privacy />} />
+            <Route path='/ultrapoints' element={<UltrapointsInfo />} />
             <Route path='*' element={<NotFound />} />
             {!user && (
               <>

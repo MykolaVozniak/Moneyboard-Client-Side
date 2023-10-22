@@ -10,6 +10,8 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
+    const fullPath = window.location.href;
+    const invitePath = `${window.location.origin}/invite/`;
 
     const [formData, setFormData] = useState({
         email: '',
@@ -49,7 +51,11 @@ const Login = () => {
                 dispatch(setUserInfo(dataInfo));
                 //console.log(dataInfo);
                 //alert('Success');
-                navigate('/workspace');
+                if (fullPath.includes(invitePath)){
+                }
+                else{
+                    navigate('/workspace');
+                }
             } else {
                 const dataError = await responseLogin.json();
                 setError(dataError.error);

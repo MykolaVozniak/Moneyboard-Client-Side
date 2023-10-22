@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import config from "../../../config"
 import CopyToClipboard from 'react-copy-to-clipboard';
+import SpinnerPage from '../../../components/SpinnerPage';
 
 const ProjectId = () => {
     const [projectInfo, setProjectInfo] = useState(null);
@@ -45,7 +46,7 @@ const ProjectId = () => {
     }, [projectId]);
 
     if (!projectInfo) {
-        return <div>Loading...</div>;
+        return <SpinnerPage/>;
     }
 
     return (

@@ -5,13 +5,10 @@ import { PlusSquare as IconForCreate } from 'react-bootstrap-icons';
 import OwnerProjectsList from '../../components/OwnerProjectsList';
 import MemberProjectsList from '../../components/MemberProjectsList';
 import { useSelector } from 'react-redux';
+import SpinnerPage from '../../components/SpinnerPage';
 
 const Workspace = () => {
   const isProjectListExist = useSelector((state) => state.auth.isProjectsExist);
-
-  if (!<OwnerProjectsList /> && !<MemberProjectsList />) {
-    return <div>Loading...</div>;
-  }
 
   return (
       <Row className='row align-items-center h-100'>

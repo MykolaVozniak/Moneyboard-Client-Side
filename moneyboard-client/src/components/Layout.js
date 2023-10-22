@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import logo from '../resources/Logos/MbLogoCompact.png';
 import { logoutUser } from '../redux/authSlice';
 
 const Layout = () => {
+  const [expanded, setExpanded] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -17,8 +18,16 @@ const Layout = () => {
 
   return (
     <div className='d-flex flex-column vh-100'>
-      <header  className='mb-3'>
-        <Navbar fixed='top' expand='md' bg='dark' variant='dark' className='shadow px-3'>
+      <header className='mb-3'>
+        <Navbar
+          expanded={expanded}
+          onToggle={() => setExpanded(!expanded)}
+          fixed='top'
+          expand='md'
+          bg='dark'
+          variant='dark'
+          className='shadow px-3'
+        >
           <Navbar.Brand as={Link} to='/'>
             <img
               src={logo}
@@ -33,23 +42,23 @@ const Layout = () => {
             {user ? (
               <>
                 <Nav className='col justify-content-start'>
-                  <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                  <Nav.Link as={Link} to='/workspace'>Workspace</Nav.Link>
+                  <Nav.Link as={Link} to='/' onClick={() => setExpanded(false)}>Home</Nav.Link>
+                  <Nav.Link as={Link} to='/workspace' onClick={() => setExpanded(false)}>Workspace</Nav.Link>
                 </Nav>
                 <Nav className='col justify-content-end'>
-                  <Nav.Link as={Link} to='/account'>My Account</Nav.Link>
-                  <Nav.Link onClick={handleLogout} as={Link} to='/'>Logout</Nav.Link>
+                  <Nav.Link as={Link} to='/account' onClick={() => setExpanded(false)}>My Account</Nav.Link>
+                  <Nav.Link onClick={() => {handleLogout(); setExpanded(false);}} as={Link} to='/'>Logout</Nav.Link>
                 </Nav>
               </>
             ) : (
               <>
                 <Nav className='col justify-content-start'>
-                  <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                  <Nav.Link as={Link} to='/privacy'>Privacy</Nav.Link>
+                  <Nav.Link as={Link} to='/' onClick={() => setExpanded(false)}>Home</Nav.Link>
+                  <Nav.Link as={Link} to='/privacy' onClick={() => setExpanded(false)}>Privacy</Nav.Link>
                 </Nav>
                 <Nav className='col justify-content-end'>
-                  <Nav.Link as={Link} to='/register'>Register</Nav.Link>
-                  <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                  <Nav.Link as={Link} to='/register' onClick={() => setExpanded(false)}>Register</Nav.Link>
+                  <Nav.Link as={Link} to='/login' onClick={() => setExpanded(false)}>Login</Nav.Link>
                 </Nav>
               </>
             )}

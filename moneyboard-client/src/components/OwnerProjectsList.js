@@ -24,6 +24,9 @@ const OwnerProjectsList = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
+                    if (data.length !==0) {
+                        dispatch(setProjectsExist(true));
+                    }
                     //console.log(data);
                 } else {
                     console.error('Error', response.statusText);
@@ -35,10 +38,6 @@ const OwnerProjectsList = () => {
 
         fetchProjects();
     }, []);
-
-    if (projects.length !==0) {
-        dispatch(setProjectsExist(true));
-    }
 
     return (
         <>

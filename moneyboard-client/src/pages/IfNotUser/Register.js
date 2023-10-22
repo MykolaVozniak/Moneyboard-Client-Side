@@ -48,13 +48,6 @@ const Register = () => {
                 NewErrorKey: ['Unknown error, check the correctness of the entered data.']
             }));
         }
-
-        if (formData.password !== confirmPassword) {
-            setError((prevError) => ({
-                ...prevError,
-                NewErrorKey: ['Passwords do not match.']
-            }));
-        }
     };
 
     return (

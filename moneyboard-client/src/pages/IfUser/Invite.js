@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import config from "../../config";
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import SpinnerPage from '../../components/SpinnerPage';
 
 const Invite = () => {
     const [error, setError] = useState(null);
@@ -64,7 +65,7 @@ const Invite = () => {
     };
 
     if (!projectInfo) {
-        return <div>Loading...</div>;
+        return <SpinnerPage/>;
     }
 
     if (projectInfo.IsOwner !== null) {
