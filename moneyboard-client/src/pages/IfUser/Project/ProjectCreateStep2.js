@@ -162,7 +162,7 @@ const ProjectCreateStep2 = () => {
                                 onClick={handleSubmit}
                                 disabled={isSubmitting}
                             >
-                                CreateS
+                                Create
                             </Button>
                         </div>
                     </Form>

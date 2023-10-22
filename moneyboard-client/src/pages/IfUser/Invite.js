@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import config from "../../config";
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Invite = () => {
     const [error, setError] = useState(null);
@@ -22,15 +24,16 @@ const Invite = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
+                    setError(null);
                     setProjectInfo(data);
                 } else {
-                    console.error('Error fetching project info:', response.statusText);
+                    const dataError = await response.json();
+                    setError(dataError.error);
                 }
             } catch (error) {
-                console.error('Error fetching project info:', error);
+                setError(error);
             }
         };
-
         fetchProjectInfo();
     }, [projectId]);
 
@@ -52,10 +55,10 @@ const Invite = () => {
             } else {
                 const dataError = await response.json();
                 setError(dataError.error);
-                console.error(dataError.error);
+                //console.error(dataError.error);
             }
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             setError(error);
         }
     };
@@ -64,20 +67,44 @@ const Invite = () => {
         return <div>Loading...</div>;
     }
 
-    if(projectInfo.IsOwner !== null){
+    if (projectInfo.IsOwner !== null) {
         navigate(`/workspace`);
     }
 
     return (
-        <div>
-                                <h2>{projectInfo.Name}</h2>
-        <p>Валюта проекту: {projectInfo.Currency}</p>
-        <p>Базова зарплата: {projectInfo.BaseSalary}</p>
-        <p>Дата виплати зарплати: {projectInfo.SalaryDate}</p>
-          <button onClick={handleApply}>Apply</button>
-          <button >Ignore</button> {/* to workspace */}
-        
-      </div>
+        <>
+            <div className='h-100'>
+                <Container className='h-100'>
+                    <Row>
+                        <Col xs={12} className='d-flex align-items-center justify-content-center'>
+                            <Container className='bg-white border-0 rounded-4 shadow-lg px-5 py-4 m-5 col-sm-12 col-md-6'>
+                                <h2 className='text-center'>Invitation to the "{projectInfo.Name}"</h2>
+                                <Container className="mt-4">
+                                    <p className='mt-4'>Project Currency: {projectInfo.Currency}.</p>
+                                    <p>Base Salary: {projectInfo.BaseSalary} {projectInfo.Currency} / month.</p>
+                                    <p>Payday: {projectInfo.PayDay} day of every month.</p>
+                                    <Row>
+                                        <Col>
+                                            <div className='d-flex justify-content-center mt-4'>
+                                                <Button variant="success" className='col-12' onClick={handleApply}>Apply</Button>
+                                            </div>
+                                        </Col>
+                                        <Col>
+                                            <div className='d-flex justify-content-center mt-4'>
+                                                <Link to='/workspace' className='btn btn-danger col-12'>
+                                                    Ignore
+                                                </Link>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Container>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        </>
+
     );
 };
 
