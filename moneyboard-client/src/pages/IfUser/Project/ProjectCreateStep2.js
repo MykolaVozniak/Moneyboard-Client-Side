@@ -23,8 +23,13 @@ const ProjectCreateStep2 = () => {
 
     const [projectPoinPercent, setProjectPoinPercent] = useState(0);
 
+    const [funkResponse1, setFuncResponse1] = useState(false);
+    const [funkResponse2, setFuncResponse2] = useState([]);
+    const hasFalseValue = funkResponse2.some(item => item === false);
+
     const handleUpdateProjectPoint = async () => {
         setIsSubmitting(true);
+        setFuncResponse1(false);
         try {
             const response = await fetch(`${config.API_PROJECT_POINT}${projectId}`, {
                 method: 'PUT',
@@ -38,6 +43,7 @@ const ProjectCreateStep2 = () => {
 
             if (response.ok) {
                 setErrors([]);
+                setFuncResponse1(true);
             } else {
                 const dataError = await response.json();
                 if (!errors.includes(dataError.error)) {
@@ -132,13 +138,16 @@ const ProjectCreateStep2 = () => {
 
             if (response.ok) {
                 setErrors([]);
+                setFuncResponse2(responses => [...responses, true]);
             } else {
+                setFuncResponse2(responses => [...responses, false]);
                 const dataError = await response.json();
                 if (!errors.includes(dataError.error)) {
                     setErrors(prevErrors => [...prevErrors, dataError.error]);
                 }
             }
         } catch (error) {
+            setFuncResponse2(responses => [...responses, false]);
             if (!errors.includes(criticalError)) {
                 setErrors(prevErrors => [...prevErrors, criticalError]);
             }
@@ -147,6 +156,8 @@ const ProjectCreateStep2 = () => {
     };
 
     const handleSubmit = () => {
+        //console.log(funkResponse2);
+        setFuncResponse2([]);
         roles.forEach(role => {
             handleSubmitRole(role);
         });
@@ -246,6 +257,10 @@ const ProjectCreateStep2 = () => {
         navigate(`/workspace`);
     }
 
+    if(funkResponse1 && !hasFalseValue){
+        navigate(`/project/${projectId}`);
+    }
+
     return (
         <>
             <div className='h-100'>
@@ -325,7 +340,15 @@ const ProjectCreateStep2 = () => {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <Button variant="success" onClick={handleCreateRole} className='mt-2 d-flex justify-content-center w-100'><Plus size={24} />New Role</Button>
+                                        <Button
+                                        variant="success"
+                                        onClick={() => {
+                                            handleSubmit();
+                                            handleCreateRole();
+                                        }}
+                                        className='mt-2 d-flex justify-content-center w-100'>
+                                        <Plus size={24} />New Role
+                                        </Button>
 
                                         <h2 className='text-center mt-4'>Set the Ultrapoint Percentage for Your Project</h2>
                                         <Card className='d-inline-block p-2 mt-2 d-flex justify-content-center border-0'>
