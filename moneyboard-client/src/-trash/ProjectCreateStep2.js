@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-import config from "../../../config";
-import { Badge, Button, Card, Col, Container, Form, FormControl, InputGroup, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import config from "../../../config"
+import { Badge, Button, Card, Col, Container, Form, FormControl, FormSelect, InputGroup, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import SpinnerPage from '../../../components/SpinnerPage';
 import { Link } from 'react-router-dom';
-import { App, LockFill, Plus, XCircle } from 'react-bootstrap-icons';
+import { App, LockFill, Plus, PlusLg, XCircle } from 'react-bootstrap-icons';
 
 const ProjectCreateStep2 = () => {
     const navigate = useNavigate();
@@ -13,33 +13,16 @@ const ProjectCreateStep2 = () => {
     const user = useSelector((state) => state.auth.user);
 
     const [errors, setErrors] = useState([]);
-    const [oks, setOks] = useState(0);
-    const [rightButton, setRightButton] = useState(false);
     const [projectInfo, setProjectInfo] = useState(null);
     const [roles, setRoles] = useState([]);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [projectPoinPercent, setProjectPoinPercent] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const criticalError = 'Unknown critical error';
 
-    const addError = (error) => {
-        setErrors(prevErrors => {
-            const uniqueErrors = Array.from(new Set([...prevErrors, error]));
-            return uniqueErrors;
-        });
-    };
+    
 
-    const clearErrors = () => {
-        setErrors([]);
-    };
 
-    const addOk = () => {
-        setOks(prevValue => prevValue + 1);
-    }
-
-    const clearOks = () => {
-        setOks(0);
-    }
 
     const handleUpdateProjectPoint = async () => {
         setIsSubmitting(true);
@@ -55,38 +38,67 @@ const ProjectCreateStep2 = () => {
             });
 
             if (response.ok) {
-                addOk();
-            }
-            else{
+                setErrors([]);
+            } else {
                 const dataError = await response.json();
-                addError(dataError.error);
+                    setErrors(prevErrors => [...prevErrors, dataError.error]);
+
             }
         } catch (error) {
-            addError(criticalError);
+                setErrors(prevErrors => [...prevErrors, criticalError]);
         }
         setIsSubmitting(false);
     };
 
-    const updateRolesList = async () => {
-        try {
-            const response = await fetch(`${config.API_ROLE_PROJECT}${projectId}`, {
-                headers: {
-                    'accept': '*/*',
-                    'Authorization': `Bearer ${user.Token}`
+    useEffect(() => {
+        const fetchProjectInfo = async () => {
+            try {
+                const response = await fetch(`${config.API_PROJECT_INFO}${projectId}`, {
+                    headers: {
+                        'accept': '*/*',
+                        'Authorization': `Bearer ${user.Token}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setProjectInfo(data);
+                    setProjectPoinPercent(data.ProjectPoinPercent)
+                    setErrors([]);
+                } else {
+                    const dataError = await response.json();
+                        setErrors(prevErrors => [...prevErrors, dataError.error]);
                 }
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                setRoles(data);
-            } else {
-                const dataError = await response.json();
-                addError(dataError.error);
+            } catch (error) {
+                    setErrors(prevErrors => [...prevErrors, criticalError]);
             }
-        } catch (error) {
-            addError('Error fetching roles');
-        }
-    };
+        };
+
+        fetchProjectInfo();
+    }, [projectId]);
+
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await fetch(`${config.API_ROLE_PROJECT}${projectId}`, {
+                    headers: {
+                        'accept': '*/*',
+                        'Authorization': `Bearer ${user.Token}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setRoles(data);
+                    setErrors([]);
+                } else {
+                    const dataError = await response.json();
+                        setErrors(prevErrors => [...prevErrors, dataError.error]);
+                }
+            } catch (error) {
+                    setErrors(prevErrors => [...prevErrors, criticalError]);
+            }
+        };
+        fetchRoles();
+    }, [projectId]);
 
     const handleRoleChange = (e, index, field) => {
         const updatedRolesCopy = [...roles];
@@ -106,31 +118,28 @@ const ProjectCreateStep2 = () => {
                 },
                 body: JSON.stringify(role),
             });
+            console.log(JSON.stringify(role));
 
             if (response.ok) {
-                addOk();
-            }
-            else{
+                
+            } else {
                 const dataError = await response.json();
-                addError(dataError.error);
+                    setErrors(prevErrors => [...prevErrors, dataError.error]);
             }
         } catch (error) {
-            addError(criticalError);
+                setErrors(prevErrors => [...prevErrors, criticalError]);
         }
         setIsSubmitting(false);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        for (const role of roles) {
-            await handleSubmitRole(role);
-        }
-        await handleUpdateProjectPoint();
+    const handleSubmit = () => {
+        //console.log(funkResponse2);
+        roles.forEach(role => {
+            handleSubmitRole(role);
+        });
     };
 
-    const handleCreateRole = async (e) => {
-        e.preventDefault();
-        await handleSubmit(e);
+    const handleCreateRole = async () => {
         setIsSubmitting(true);
         try {
             const response = await fetch(`${config.API_ROLE_CREATE}${projectId}`, {
@@ -144,16 +153,41 @@ const ProjectCreateStep2 = () => {
             });
 
             if (response.ok) {
-                await updateRolesList(); 
+                setErrors([]);
+                updateRolesList();
             } else {
                 const dataError = await response.json();
-                addError(dataError.error);
+                    setErrors(prevErrors => [...prevErrors, dataError.error]);
             }
         } catch (error) {
-            addError(criticalError);
+                setErrors(prevErrors => [...prevErrors, criticalError]);
         }
 
         setIsSubmitting(false);
+    };
+
+    const updateRolesList = async () => {
+        try {
+            const response = await fetch(`${config.API_ROLE_PROJECT}${projectId}`, {
+                headers: {
+                    'accept': '*/*',
+                    'Authorization': `Bearer ${user.Token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setRoles(data);
+                setErrors([]);
+            } else {
+                const dataError = await response.json();
+                    setErrors(prevErrors => [...prevErrors, dataError.error]);
+
+            }
+        } catch (error) {
+                setErrors(prevErrors => [...prevErrors, criticalError]);
+
+        }
     };
 
     const handleDeleteRole = async (roleId) => {
@@ -168,46 +202,22 @@ const ProjectCreateStep2 = () => {
             });
 
             if (response.ok) {
-                await updateRolesList(); 
+                setErrors([]);
+                updateRolesList();
             } else {
                 const dataError = await response.json();
-                addError(dataError.error);
+
+                    setErrors(prevErrors => [...prevErrors, dataError.error]);
+
             }
         } catch (error) {
-            addError(criticalError);
+
+                setErrors(prevErrors => [...prevErrors, criticalError]);
+
         }
         setIsSubmitting(false);
     };
 
-    useEffect(() => {
-        const fetchProjectInfo = async () => {
-            try {
-                const response = await fetch(`${config.API_PROJECT_INFO}${projectId}`, {
-                    headers: {
-                        'accept': '*/*',
-                        'Authorization': `Bearer ${user.Token}`
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setProjectInfo(data);
-                    setProjectPoinPercent(data.ProjectPoinPercent); // Додано цей рядок
-                    setErrors([]);
-                } else {
-                    const dataError = await response.json();
-                    addError(dataError.error);
-                }
-            } catch (error) {
-                addError(criticalError);
-            }
-        };
-
-        fetchProjectInfo();
-    }, [projectId]);
-
-    useEffect(() => {
-        updateRolesList();
-    }, [projectId]);
 
     if (!projectInfo) {
         return <SpinnerPage />;
@@ -215,11 +225,6 @@ const ProjectCreateStep2 = () => {
 
     if (projectInfo.IsOwner !== true) {
         navigate(`/workspace`);
-    }
-
-    if (oks === (1 + roles.length) && rightButton){
-            console.log('yay!');
-            navigate(`/project/${projectId}`);
     }
 
     return (
@@ -230,7 +235,7 @@ const ProjectCreateStep2 = () => {
                         <Col xs={12} className='d-flex align-items-center justify-content-center'>
                             <Container className='bg-white border-0 rounded-4 shadow-lg px-5 py-4 mt-5 col-sm-12 col-md-5'>
                                 <h2 className='text-center'>Build the Role List for Your Project</h2>
-                                <Container className="col-sm-12 col-md-11 p-0">
+                                <Container className="col-sm-12 col-md-11 p-0"> {/*p-0*/}
                                     {errors.length > 0 && (
                                         <div className='card rounded-2 p-2 mt-4 border-danger'>
                                             {errors.map((error, index) => (
@@ -302,15 +307,13 @@ const ProjectCreateStep2 = () => {
                                             ))}
                                         </ul>
                                         <Button
-                                            variant="success"
-                                            onClick={(e) => {
-                                                clearErrors();
-                                                clearOks();
-                                                handleCreateRole(e);
-                                                setRightButton(false);
-                                            }}
-                                            className='mt-2 d-flex justify-content-center w-100'>
-                                            <Plus size={24} />New Role
+                                        variant="success"
+                                        onClick={() => {
+                                            //handleSubmit();
+                                            handleCreateRole();
+                                        }}
+                                        className='mt-2 d-flex justify-content-center w-100'>
+                                        <Plus size={24} />New Role
                                         </Button>
 
                                         <h2 className='text-center mt-4'>Set the Ultrapoint Percentage for Your Project</h2>
@@ -336,13 +339,10 @@ const ProjectCreateStep2 = () => {
                                             variant="primary"
                                             className='mt-4 d-flex justify-content-center w-100'
                                             onClick={() => {
-                                                clearErrors();
-                                                clearOks();
-                                                setRightButton(true);
+                                                handleSubmit();
+                                                handleUpdateProjectPoint();
                                             }}
-                                            on
-                                        >
-                                            Save Changes
+                                            disabled={isSubmitting}>Save Changes
                                         </Button>
 
                                         <div className='mt-2 m-0 p-0'>
