@@ -69,7 +69,7 @@ const Invite = () => {
     }
 
     if (projectInfo.IsOwner !== null) {
-        navigate(`/workspace`);
+        navigate(`/project/${projectId}`);
     }
 
     return (

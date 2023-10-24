@@ -51,12 +51,18 @@ const Account = (props) => {
                         </div>
                     </div>
 
-                    <div className='d-flex justify-content-center my-4'>
+                    <div className='d-flex justify-content-center mt-4'>
                         <Link to='/account/edit' className='btn btn-primary col-8'>
                             Change account info
                         </Link>
                     </div>
 
+                    <div className='d-flex justify-content-center my-4'>
+                        <Link to='/security/edit' className='btn btn-primary col-8'>
+                            Security Settings
+                        </Link>
+                    </div>
+                    
                 </div>
             </div>
         </div>

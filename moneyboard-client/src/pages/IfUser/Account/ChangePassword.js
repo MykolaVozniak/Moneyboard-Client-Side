@@ -5,47 +5,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserInfo } from '../../../redux/authSlice';
 import { useNavigate } from 'react-router';
 
-const AccountEdit = () => {
+const ChangePassword = () => {
     const info = useSelector((state) => state.auth.info);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
-    const [formData, setFormData] = useState({
-        firstname: `${info.Firstname}`,
-        lastname: `${info.Lastname}`,
-        cardNumber: `${info.CardNumber}`,
+    const [passwordFormData, setPasswordFormData] = useState({
+        currentPassword: '',
+        newPassword: '',
     });
 
-    const handleChange = (e) => {
+    const handlePasswordChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setPasswordFormData({ ...passwordFormData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handlePasswordSubmit = async (e) => {
         e.preventDefault();
+
         try {
-            const response = await fetch(config.API_USER_EDIT, {
+            const response = await fetch(config.API_AUTH_CHANGE_PASSWORD, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json-patch+json',
                     'Authorization': `Bearer ${user.Token}`,
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(passwordFormData),
             });
 
             if (response.ok) {
-                setError(null);
-                const responseInfo = await fetch(config.API_USER_INFO, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${user.Token}`
-                    }
-                });
-                const dataInfo = await responseInfo.json();
-                dispatch(setUserInfo(dataInfo));
-                navigate('/account');
+                alert('success')
             } else {
                 const dataError = await response.json();
                 setError(dataError.errors);
@@ -61,7 +52,7 @@ const AccountEdit = () => {
     return (
         <div className='container col-sm-12 col-md-4 my-4'>
             <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
-                <h2 className='text-center'>Change Account Info</h2>
+                <h2 className='text-center'>Change Password</h2>
                 {error && (
                     <div className='card rounded-2 p-2 mt-2 border-danger'>
                         {Object.keys(error).map((key) => (
@@ -73,68 +64,56 @@ const AccountEdit = () => {
                         ))}
                     </div>
                 )}
-                <Form onSubmit={handleSubmit}>
 
+                <Form onSubmit={handlePasswordSubmit}>
                     <Form.Group className="row mt-3">
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">First Name:</p>
+                            <p className="m-0 fw-bold">Current Password:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="text"
-                                name="firstname"
+                                type="password"
+                                name="currentPassword"
                                 className='m-0 p-2 text-center'
-                                value={formData.firstname}
-                                onChange={handleChange}
+                                value={passwordFormData.currentPassword}
+                                onChange={handlePasswordChange}
                                 required
-                            //placeholder={info.Firstname}
                             />
                         </div>
                     </Form.Group>
 
                     <Form.Group className="row mt-3">
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">Last Name:</p>
+                            <p className="m-0 fw-bold">New Password:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="text"
-                                name="lastname"
+                                type="password"
+                                name="newPassword"
                                 className='m-0 p-2 text-center'
-                                value={formData.lastname}
-                                onChange={handleChange}
+                                value={passwordFormData.newPassword}
+                                onChange={handlePasswordChange}
                                 required
-                            //placeholder={info.Lastname}
-                            />
-                        </div>
-                    </Form.Group>
-
-                    <Form.Group className="row mt-3">
-                        <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">Card Number:</p>
-                        </div>
-                        <div className='col-12 col-md-7 mx-2'>
-                            <Form.Control
-                                type="number"
-                                name="cardNumber"
-                                className='m-0 p-2 text-center'
-                                value={formData.cardNumber}
-                                onChange={handleChange}
-                                required
-                            //placeholder={info.CardNumber}
                             />
                         </div>
                     </Form.Group>
 
                     <div className='d-flex justify-content-center my-4'>
                         <Button variant="primary" type="submit" className='col-8'>
-                            Submit
+                            Change Password
                         </Button>
                     </div>
                 </Form>
+                <h2 className='text-center'>Delete Account</h2>
+
+                <div className='d-flex justify-content-center mb-4 mt-2'>
+                    <Button variant="danger" className='col-8'>
+                        Delete
+                    </Button>
+                </div>
             </div>
         </div>
     );
 };
 
-export default AccountEdit;
+export default ChangePassword;

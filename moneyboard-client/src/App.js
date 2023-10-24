@@ -15,6 +15,7 @@ import Register from './pages/IfNotUser/Register';
 import Login from './pages/IfNotUser/Login';
 import Account from './pages/IfUser/Account/Account';
 import AccountEdit from './pages/IfUser/Account/AccountEdit';
+import ChangePassword from './pages/IfUser/Account/ChangePassword';
 
 import ProjectCreateStep1 from './pages/IfUser/Project/ProjectCreateStep1';
 import ProjectCreateStep2 from './pages/IfUser/Project/ProjectCreateStep2';
@@ -22,6 +23,7 @@ import ProjectId from './pages/IfUser/Project/ProjectId';
 import ProjectEdit from './pages/IfUser/Project/ProjectEdit';
 
 import Invite from './pages/IfUser/Invite'
+
 
 
 
@@ -48,11 +50,12 @@ const App = () => {
               <>
                 <Route path='/account' element={<Account />} />
                 <Route path='/account/edit' element={<AccountEdit />} />
+                <Route path='/security/edit' element={<ChangePassword />} />
                 <Route path='/workspace' element={<Workspace />} />
                 <Route path='/project/create/0' element={<ProjectCreateStep1 />} />
                 <Route path='/project/create/:projectId' element={<ProjectCreateStep2 />} />
                 <Route path="/project/:projectId" element={<ProjectId />} />
-                <Route path='/project/edit' element={<ProjectEdit />} />
+                <Route path='/project/edit/:projectId' element={<ProjectEdit />} />
                 <Route path='/invite/:projectId' element={<Invite />} />
               </>
             )}
