@@ -184,7 +184,7 @@ const ProjectId = () => {
                                         <span>Leave the Project</span>
                                     </div>
                                 </Button>
-                                <Modal show={show} onHide={handleClose} animation={false} aria-labelledby="contained-modal-title-vcenter" centered>
+                                <Modal show={show} onHide={handleClose} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
                                     <Modal.Body className='text-center'>
                                         <XCircle className='text-danger my-4' size={100}></XCircle>
                                         <h2>Are You Sure?</h2>

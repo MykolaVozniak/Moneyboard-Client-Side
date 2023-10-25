@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { PlusSquare as IconForCreate } from 'react-bootstrap-icons';
-import OwnerProjectsList from '../../components/OwnerProjectsList';
-import MemberProjectsList from '../../components/MemberProjectsList';
+import OwnerProjectsList from '../../components/Lists/OwnerProjectsList';
+import MemberProjectsList from '../../components/Lists/MemberProjectsList';
 import { useSelector } from 'react-redux';
 import SpinnerPage from '../../components/SpinnerPage';
 

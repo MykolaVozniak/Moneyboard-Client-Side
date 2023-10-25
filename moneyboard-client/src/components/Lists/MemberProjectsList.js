@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import config from '../config';
+import config from '../../config';
 import { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 import { HexagonFill } from 'react-bootstrap-icons';
 import { useDispatch} from 'react-redux';
-import { setProjectsExist } from '../redux/authSlice';
+import { setProjectsExist } from '../../redux/authSlice';
 
-const OwnerProjectsList = () => {
+const MemberProjectsList = () => {
     const [projects, setProjects] = useState([]);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
@@ -14,13 +14,12 @@ const OwnerProjectsList = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(config.API_PROJECT_OWNER_LIST, {
+                const response = await fetch(config.API_PROJECT_MEMBER_LIST, {
                     headers: {
                         'accept': '*',
                         'Authorization': `Bearer ${user.Token}`
                     }
                 });
-
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
@@ -43,7 +42,7 @@ const OwnerProjectsList = () => {
         <>
             {projects.length !== 0 && (
                 <>
-                    <h5>Leader of:</h5>
+                    <h5>Member in:</h5>
                     <div>
                         <ul className='ps-2'>
                             {projects.map(project => (
@@ -65,4 +64,4 @@ const OwnerProjectsList = () => {
 };
 
 
-export default OwnerProjectsList;
+export default MemberProjectsList;
