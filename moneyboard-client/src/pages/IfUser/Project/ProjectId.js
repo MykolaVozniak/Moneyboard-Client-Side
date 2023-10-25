@@ -241,12 +241,12 @@ const ProjectId = () => {
                     </Card>
                     {projectInfo.IsOwner && (
                         <Container className='justify-content-center d-flex mt-auto mx-auto'>
-                            <Col xs={7}>
-                                <Card className={`border-4 rounded-3 align-items-center justify-content-center text-center p-3 ${totalSalaryData.IsEnough == true ? 'border-danger' : ''}`}>
-                                    <h4 className={`fw-semibold d-inline ${totalSalaryData.IsEnough == true ? 'text-danger' : ''}`}>Required amount to be paid: {totalSalaryData.TotalPayment} {projectInfo.Currency}</h4>
-                                    <h5 className={`fw-semibold d-inline ${totalSalaryData.IsEnough == true ? 'text-danger' : 'text-muted'}`}>Amount on the card: {totalSalaryData.BankCardMoney} {projectInfo.Currency}</h5>
+                            <Col xs={6}>
+                                <Card className={`border-4 rounded-3 align-items-center justify-content-center text-center p-2 ${totalSalaryData.IsEnough == true ? 'border-danger' : ''}`}>
+                                    <h5 className={`fw-semibold d-inline m-1 ${totalSalaryData.IsEnough == true ? 'text-danger' : ''}`}>Required amount to be paid: {totalSalaryData.TotalPayment} {projectInfo.Currency}</h5>
+                                    <p className={`d-inline m-0 ${totalSalaryData.IsEnough == true ? 'text-danger' : 'text-muted'}`}>Amount on the card: {totalSalaryData.BankCardMoney} {projectInfo.Currency}</p>
                                     {totalSalaryData.IsEnough && (
-                                        <h5 className='fw-semibold d-inline text-danger'>Not enough money: {((totalSalaryData.BankCardMoney) - (totalSalaryData.TotalPayment)) * (-1)} {projectInfo.Currency}</h5>
+                                        <p className='d-inline text-danger m-0'>Not enough money: {((totalSalaryData.BankCardMoney) - (totalSalaryData.TotalPayment)) * (-1)} {projectInfo.Currency}</p>
                                     )}
                                 </Card>
                                 <Modal show={showNotEnoughModal} onHide={() => setShowNotEnoughModal(false)} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
