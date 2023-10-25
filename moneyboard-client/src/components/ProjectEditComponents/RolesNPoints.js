@@ -52,7 +52,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                 },
                 body: JSON.stringify({ projectPoinPercent }),
             });
-
             if (response.ok) {
                 addOk();
             }
@@ -190,7 +189,7 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                 if (response.ok) {
                     const data = await response.json();
                     setProjectInfo(data);
-                    setProjectPoinPercent(data.ProjectPoinPercent); // Додано цей рядок
+                    setProjectPoinPercent(data.ProjectPoinPercent);
                     setErrors([]);
                 } else {
                     const dataError = await response.json();
@@ -219,6 +218,7 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     if (oks === (1 + roles.length) && rightButton) {
         console.log('yay!');
         navigate(buttonLink);
+        setOks(0);
     }
 
     return (

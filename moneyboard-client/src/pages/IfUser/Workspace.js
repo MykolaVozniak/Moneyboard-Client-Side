@@ -11,7 +11,7 @@ const Workspace = () => {
   const isProjectListExist = useSelector((state) => state.auth.isProjectsExist);
 
   return (
-      <Row className='row align-items-center h-100'>
+      <Row className='h-100'>
         <Col xs={12} md={4} className="h-100">
           <div className="card rounded-4 border-0 shadow-lg bg-dark text-light h-100">
             <div className='px-5 pt-4'>
