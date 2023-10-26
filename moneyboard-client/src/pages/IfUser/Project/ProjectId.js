@@ -295,29 +295,37 @@ const ProjectId = () => {
                                         </p>
                                     </Col>
                                     <Col xs={4} md={2} className='m-0 p-1'>
-                                        {member.IsOwner ? (
-                                            <p className='bg-info bg-opacity-50 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1'>
+                                        {projectInfo.IsOwner && (
+                                            <>
+                                                {member.IsOwner ? (
+                                                    <p className='bg-info bg-opacity-50 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1'>
+                                                        {member.RoleName}
+                                                    </p>
+                                                ) : (
+                                                    <InputGroup className='w-100 h-100'>
+                                                        <FormSelect
+                                                            as="select"
+                                                            name="role"
+                                                            value={member.RoleId} // Assuming RoleId is the correct identifier for the role
+                                                            onChange={(e) => handleRoleAssignment(member.UserId, e.target.value)}
+                                                            required
+                                                            className='border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'
+                                                        >
+                                                            {roles.map((role) => (
+                                                                !role.IsDefolt ? (
+                                                                    <option key={role.RoleId} value={role.RoleId}>
+                                                                        {role.RoleName}
+                                                                    </option>
+                                                                ) : null
+                                                            ))}
+                                                        </FormSelect>
+                                                    </InputGroup>
+                                                )}
+                                            </>)}
+                                        {!projectInfo.IsOwner && (
+                                            <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
                                                 {member.RoleName}
                                             </p>
-                                        ) : (
-                                            <InputGroup className='w-100 h-100'>
-                                                <FormSelect
-                                                    as="select"
-                                                    name="role"
-                                                    value={member.RoleId} // Assuming RoleId is the correct identifier for the role
-                                                    onChange={(e) => handleRoleAssignment(member.UserId, e.target.value)}
-                                                    required
-                                                    className='border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'
-                                                >
-                                                    {roles.map((role) => (
-                                                        !role.IsDefolt ? (
-                                                        <option key={role.RoleId} value={role.RoleId}>
-                                                            {role.RoleName}
-                                                        </option>
-                                                        ) : null
-                                                    ))}
-                                                </FormSelect>
-                                            </InputGroup>
                                         )}
                                     </Col>
                                     <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{projectInfo.BaseSalary} {projectInfo.Currency}</p></Col>
