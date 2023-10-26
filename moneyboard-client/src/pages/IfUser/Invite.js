@@ -65,7 +65,7 @@ const Invite = () => {
     };
 
     if (!projectInfo) {
-        return <SpinnerPage/>;
+        return <SpinnerPage />;
     }
 
     if (projectInfo.IsOwner !== null) {
@@ -80,7 +80,8 @@ const Invite = () => {
                         <Col xs={12} className='d-flex align-items-center justify-content-center'>
                             <Container className='bg-white border-0 rounded-4 shadow-lg px-5 py-4 m-5 col-sm-12 col-md-6'>
                                 <h2 className='text-center'>Invitation to the "{projectInfo.Name}"</h2>
-                                <p className='text-center text-muted mt-2'>By <span ><Image src={`${config.LOCALHOST_URL}/images/users/${projectInfo.OwnerURL}`} roundedCircle height='25' className='mb-1 border border-2 border-secondary'/></span> {projectInfo.OwnerName}</p>                   
+                                <p className='text-center text-muted mt-2'>By {projectInfo.OwnerName}</p>
+                                {/* <span ><Image src={`${config.LOCALHOST_URL}/images/users/${projectInfo.OwnerURL}`} roundedCircle height='25' className='mb-1 border border-2 border-secondary'/></span>               */}
                                 <Container className="mt-4">
                                     <p className='mt-4'>Project Currency: {projectInfo.Currency}.</p>
                                     <p>Base Salary: {projectInfo.BaseSalary} {projectInfo.Currency} / month.</p>
@@ -100,7 +101,7 @@ const Invite = () => {
                                         </Col>
                                     </Row>
                                 </Container>
-                                
+
                             </Container>
                         </Col>
                     </Row>

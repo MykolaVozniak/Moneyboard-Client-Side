@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Card, Col, Container, FormSelect, InputGroup, Modal, OverlayTrigger, Row, Table, Tooltip } from 'react-bootstrap';
+import { Button, ButtonGroup, Card, Col, Container, Dropdown, FormSelect, InputGroup, Modal, OverlayTrigger, Row, SplitButton, Table, Tooltip } from 'react-bootstrap';
 import { CaretRightFill, DoorOpen, DoorOpenFill, ExclamationTriangle, Link45deg, PencilSquare, X, XCircle, XLg, XSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ const ProjectId = () => {
     const handleShow = () => setShow(true);
 
     const [roles, setRoles] = useState([]);
-    const [memberRoleName, setMemberRoleName] = useState(null);
+
 
     useEffect(() => {
         const showRolesList = async () => {
@@ -54,7 +54,7 @@ const ProjectId = () => {
 
     const handleRoleAssignment = async (userId, roleId) => {
         try {
-            const response = await fetch(`${config.API_ROLE_ASSIGNMENT}${projectId}`, {
+            const response = await fetch(`${config.API_ROLE_ASSIGNMENT}/${projectId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,13 +80,32 @@ const ProjectId = () => {
         }
     };
 
+    const handleKickUser = async (memberId) => {
+        try {
+            const response = await fetch(`${config.API_PROJECT_KICK}${memberId}/${projectId}`, {
+                method: 'DELETE',
+                headers: {
+                    'accept': '*/*',
+                    'Authorization': `Bearer ${user.Token}`,
+                },
+            });
+            if (response.ok) {
+                fetchProjectInfo();
+            } else {
+                const dataError = await response.json();
+                setError(dataError.error);
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
     const handleCopyClick = () => {
         setTooltipVisible(true);
         setTimeout(() => {
             setTooltipVisible(false);
         }, 2000);
     };
-
 
     const fetchProjectInfo = async () => {
         try {
@@ -162,15 +181,7 @@ const ProjectId = () => {
         }
     };
 
-    if (!projectInfo) {
-        return <SpinnerPage />;
-    }
-
-    if (!totalSalaryData) {
-        return <SpinnerPage />;
-    }
-
-    if (!roles) {
+    if (!projectInfo || !totalSalaryData || !roles) {
         return <SpinnerPage />;
     }
 
@@ -290,9 +301,29 @@ const ProjectId = () => {
                             {projectInfo.Members.map((member, index) => (
                                 <Row key={index} className={'d-flex flex-nowrap p-1'}>
                                     <Col xs={4} md={2} className='m-0 p-1'>
-                                        <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
-                                            {member.UserName}
-                                        </p>
+                                        {projectInfo.IsOwner && (
+                                            <>
+                                                {member.IsOwner ? (
+                                                    <p className='bg-info bg-opacity-50 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1'>
+                                                        {member.UserName}
+                                                    </p>
+                                                ) : (
+                                                    <Dropdown className='w-100 h-100'>
+                                                        <Dropdown.Toggle style={{ whiteSpace: 'normal' }} variant="secondary" id="dropdown-basic" className='bg-white text-dark border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'>
+                                                        {member.UserName}
+                                                        </Dropdown.Toggle>
+
+                                                        <Dropdown.Menu className=' border-secondary rounded-0 m-0 p-0' style={{ position: 'absolute', top: '100%', left: 0 }}>
+                                                            <Dropdown.Item onClick={() => handleKickUser(member.UserId)} className='m-0 p-0 text-center'>Kick User</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                )}
+                                            </>)}
+                                        {!projectInfo.IsOwner && (
+                                            <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
+                                                {member.UserName}
+                                            </p>
+                                        )}
                                     </Col>
                                     <Col xs={4} md={2} className='m-0 p-1'>
                                         {projectInfo.IsOwner && (
@@ -363,7 +394,7 @@ const ProjectId = () => {
                     )}
                 </div>
             </Col>
-        </Row>
+        </Row >
     );
 };
 
