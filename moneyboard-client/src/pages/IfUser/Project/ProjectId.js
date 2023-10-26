@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Card, Col, Container, Modal, OverlayTrigger, Row, Table, Tooltip } from 'react-bootstrap';
+import { Button, Card, Col, Container, FormSelect, InputGroup, Modal, OverlayTrigger, Row, Table, Tooltip } from 'react-bootstrap';
 import { CaretRightFill, DoorOpen, DoorOpenFill, ExclamationTriangle, Link45deg, PencilSquare, X, XCircle, XLg, XSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
@@ -24,6 +24,60 @@ const ProjectId = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [roles, setRoles] = useState([]);
+
+    useEffect(() => {
+        const showRolesList = async () => {
+            try {
+                const response = await fetch(`${config.API_ROLE_PROJECT}${projectId}`, {
+                    headers: {
+                        'accept': '*/*',
+                        'Authorization': `Bearer ${user.Token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setRoles(data);
+                } else {
+                    const dataError = await response.json();
+                    setError(dataError.error);
+                }
+            } catch (error) {
+                setError('Error fetching roles');
+            }
+        };
+        showRolesList();
+    }, [projectId]);
+
+    const handleRoleAssignment = async (userId, roleId) => {
+        try {
+            const response = await fetch(`${config.API_ROLE_ASSIGNMENT}${projectId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.Token}`
+                },
+                body: JSON.stringify({
+                    userId,
+                    roleId
+                })
+            });
+
+            if (response.ok) {
+                console.log('Role assigned successfully:');
+                // Оновлюємо інформацію в компоненті (за необхідності)
+            } else {
+                const dataError = await response.json();
+                console.error('Error assigning role:', dataError.error);
+                setError(dataError.error);
+            }
+        } catch (error) {
+            console.error('Error assigning role:', error);
+            setError(error);
+        }
+    };
 
     const handleCopyClick = () => {
         setTooltipVisible(true);
@@ -71,7 +125,7 @@ const ProjectId = () => {
                     const data = await response.json();
                     setError(null);
                     setTotalSalaryData(data);
-                    if (data.IsEnough == true){
+                    if (data.IsEnough == true) {
                         setShowNotEnoughModal(true);
                     }
                 } else {
@@ -111,6 +165,10 @@ const ProjectId = () => {
     }
 
     if (!totalSalaryData) {
+        return <SpinnerPage />;
+    }
+
+    if (!roles) {
         return <SpinnerPage />;
     }
 
@@ -229,12 +287,38 @@ const ProjectId = () => {
                             </Row>
                             {projectInfo.Members.map((member, index) => (
                                 <Row key={index} className={'d-flex flex-nowrap p-1'}>
-                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.UserName}</p></Col>
-                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.RoleName}</p></Col>
+                                    <Col xs={4} md={2} className='m-0 p-1'>
+                                        <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
+                                            {member.UserName}
+                                        </p>
+                                    </Col>
+                                    <Col xs={4} md={2} className='m-0 p-1'>
+                                        {member.IsOwner ? (
+                                            <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
+                                                {member.RoleName}
+                                            </p>
+                                        ) : (
+                                            <InputGroup>
+                                                <FormSelect
+                                                    as="select"
+                                                    name="role"
+                                                    value={member.RoleId} // Assuming RoleId is the correct identifier for the role
+                                                    onChange={(e) => handleRoleAssignment(member.UserId, e.target.value)}
+                                                    required
+                                                >
+                                                    {roles.map((role) => (
+                                                        <option key={role.RoleId} value={role.RoleId}>
+                                                            {role.RoleName}
+                                                        </option>
+                                                    ))}
+                                                </FormSelect>
+                                            </InputGroup>
+                                        )}
+                                    </Col>
                                     <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{projectInfo.BaseSalary} {projectInfo.Currency}</p></Col>
-                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.RolePoints} UP ({member.RolePayment} {projectInfo.Currency})</p></Col>
-                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.PersonalPoints} UP ({member.PersonelPayment} {projectInfo.Currency})</p></Col>
-                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.UserPayment} {projectInfo.Currency}</p></Col>
+                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.RolePoints} UP ({member.RolePayment.toFixed(2).endsWith('.00') ? member.RolePayment.toFixed(2).slice(0, -3) : member.RolePayment.toFixed(2)} {projectInfo.Currency})</p></Col>
+                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.PersonalPoints} UP ({member.PersonelPayment.toFixed(2).endsWith('.00') ? member.PersonelPayment.toFixed(2).slice(0, -3) : member.PersonelPayment.toFixed(2)} {projectInfo.Currency})</p></Col>
+                                    <Col xs={4} md={2} className='m-0 p-1'><p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>{member.UserPayment.toFixed(2).endsWith('.00') ? member.UserPayment.toFixed(2).slice(0, -3) : member.UserPayment.toFixed(2)} {projectInfo.Currency}</p></Col>
                                 </Row>
                             ))}
                         </Container>

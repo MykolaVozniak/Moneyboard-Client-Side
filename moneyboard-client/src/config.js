@@ -32,6 +32,7 @@ const API_ROLE_PROJECT = LOCALHOST_URL + ROLE + 'project' + '/'
 const API_ROLE_EDIT =  LOCALHOST_URL + ROLE + 'edit' + '/'
 const API_ROLE_CREATE = LOCALHOST_URL + ROLE + 'create' + '/'
 const API_ROLE_DELETE = LOCALHOST_URL + ROLE + 'delete' + '/'
+const API_ROLE_ASSIGNMENT = LOCALHOST_URL + ROLE + 'role-assignment' + '/'
 
 const config = {
     LOCALHOST_URL,
@@ -62,7 +63,8 @@ const config = {
     API_ROLE_PROJECT,
     API_ROLE_EDIT,
     API_ROLE_CREATE,
-    API_ROLE_DELETE
+    API_ROLE_DELETE,
+    API_ROLE_ASSIGNMENT,
 };
 
 export default config;

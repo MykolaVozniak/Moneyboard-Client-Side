@@ -36,6 +36,7 @@ const ProjectEdit = () => {
                 } else {
                     const dataError = await response.json();
                     setError(dataError.error);
+                    navigate(`/workspace`);
                 }
             } catch (error) {
                 setError(error);
