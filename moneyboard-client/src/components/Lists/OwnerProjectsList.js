@@ -27,7 +27,9 @@ const OwnerProjectsList = () => {
                     if (data.length !==0) {
                         dispatch(setProjectsExist(true));
                     }
-                    //console.log(data);
+                    else {
+                        dispatch(setProjectsExist(false));
+                    }
                 } else {
                     console.error('Error', response.statusText);
                 }

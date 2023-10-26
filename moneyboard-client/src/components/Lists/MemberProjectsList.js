@@ -26,6 +26,9 @@ const MemberProjectsList = () => {
                     if (data.length !==0) {
                         dispatch(setProjectsExist(true));
                     }
+                    else {
+                        dispatch(setProjectsExist(false));
+                    }
                     //console.log(data);
                 } else {
                     console.error('Error', response.statusText);
