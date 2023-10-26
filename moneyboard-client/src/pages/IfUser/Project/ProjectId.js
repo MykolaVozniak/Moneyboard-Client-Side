@@ -26,6 +26,7 @@ const ProjectId = () => {
     const handleShow = () => setShow(true);
 
     const [roles, setRoles] = useState([]);
+    const [memberRoleName, setMemberRoleName] = useState(null);
 
     useEffect(() => {
         const showRolesList = async () => {
@@ -67,7 +68,7 @@ const ProjectId = () => {
 
             if (response.ok) {
                 console.log('Role assigned successfully:');
-                // Оновлюємо інформацію в компоненті (за необхідності)
+                fetchProjectInfo();
             } else {
                 const dataError = await response.json();
                 console.error('Error assigning role:', dataError.error);
@@ -86,34 +87,35 @@ const ProjectId = () => {
         }, 2000);
     };
 
-    useEffect(() => {
-        const fetchProjectInfo = async () => {
-            try {
-                const response = await fetch(`${config.API_PROJECT_DETAILS}${projectId}`, {
-                    headers: {
-                        'accept': '*/*',
-                        'Authorization': `Bearer ${user.Token}`
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setProjectInfo(data);
-                } else {
-                    const dataError = await response.json();
-                    setError(dataError.error);
-                    console.log(error);
-                    navigate(`/NotFound`);
-                }
-            } catch (error) {
-                setError(error);
-            }
-        };
 
+    const fetchProjectInfo = async () => {
+        try {
+            const response = await fetch(`${config.API_PROJECT_DETAILS}${projectId}`, {
+                headers: {
+                    'accept': '*/*',
+                    'Authorization': `Bearer ${user.Token}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setProjectInfo(data);
+            } else {
+                const dataError = await response.json();
+                setError(dataError.error);
+                console.log(error);
+                navigate(`/NotFound`);
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    useEffect(() => {
         fetchProjectInfo();
     }, [projectId]);
 
     useEffect(() => {
-        const fetchProjectInfo = async () => {
+        const fetchTotalPayments = async () => {
             try {
                 const response = await fetch(`${config.API_PROJECT_CALCULATE_TOTAL_PAYMENTS}${projectId}`, {
                     headers: {
@@ -136,7 +138,7 @@ const ProjectId = () => {
                 setError(error);
             }
         };
-        fetchProjectInfo();
+        fetchTotalPayments();
     }, [projectId]);
 
 
@@ -294,22 +296,25 @@ const ProjectId = () => {
                                     </Col>
                                     <Col xs={4} md={2} className='m-0 p-1'>
                                         {member.IsOwner ? (
-                                            <p className={`${member.IsOwner === true ? 'bg-info bg-opacity-50' : 'border border-opacity-50 border-info'} rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1`}>
+                                            <p className='bg-info bg-opacity-50 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-1'>
                                                 {member.RoleName}
                                             </p>
                                         ) : (
-                                            <InputGroup>
+                                            <InputGroup className='w-100 h-100'>
                                                 <FormSelect
                                                     as="select"
                                                     name="role"
                                                     value={member.RoleId} // Assuming RoleId is the correct identifier for the role
                                                     onChange={(e) => handleRoleAssignment(member.UserId, e.target.value)}
                                                     required
+                                                    className='border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'
                                                 >
                                                     {roles.map((role) => (
+                                                        !role.IsDefolt ? (
                                                         <option key={role.RoleId} value={role.RoleId}>
                                                             {role.RoleName}
                                                         </option>
+                                                        ) : null
                                                     ))}
                                                 </FormSelect>
                                             </InputGroup>
