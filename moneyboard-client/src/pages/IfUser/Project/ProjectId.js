@@ -129,37 +129,34 @@ const ProjectId = () => {
         }
     };
 
+    const fetchTotalPayments = async () => {
+        try {
+            const response = await fetch(`${config.API_PROJECT_CALCULATE_TOTAL_PAYMENTS}${projectId}`, {
+                headers: {
+                    'accept': '*/*',
+                    'Authorization': `Bearer ${user.Token}`
+                }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setError(null);
+                setTotalSalaryData(data);
+                if (data.IsEnough == true) {
+                    setShowNotEnoughModal(true);
+                }
+            } else {
+                const dataError = await response.json();
+                setError(dataError.error);
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
     useEffect(() => {
         fetchProjectInfo();
-    }, [projectId]);
-
-    useEffect(() => {
-        const fetchTotalPayments = async () => {
-            try {
-                const response = await fetch(`${config.API_PROJECT_CALCULATE_TOTAL_PAYMENTS}${projectId}`, {
-                    headers: {
-                        'accept': '*/*',
-                        'Authorization': `Bearer ${user.Token}`
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setError(null);
-                    setTotalSalaryData(data);
-                    if (data.IsEnough == true) {
-                        setShowNotEnoughModal(true);
-                    }
-                } else {
-                    const dataError = await response.json();
-                    setError(dataError.error);
-                }
-            } catch (error) {
-                setError(error);
-            }
-        };
         fetchTotalPayments();
     }, [projectId]);
-
 
     const handleLeaveProject = async () => {
         try {
