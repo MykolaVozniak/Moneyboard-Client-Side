@@ -54,7 +54,7 @@ const ProjectId = () => {
 
     const handleRoleAssignment = async (userId, roleId) => {
         try {
-            const response = await fetch(`${config.API_ROLE_ASSIGNMENT}/${projectId}`, {
+            const response = await fetch(`${config.API_ROLE_ASSIGNMENT}${projectId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
