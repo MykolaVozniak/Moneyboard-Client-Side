@@ -54,7 +54,7 @@ const App = () => {
                 <Route path='/workspace' element={<Workspace />} />
                 <Route path='/project/create/0' element={<ProjectCreateStep1 />} />
                 <Route path='/project/create/:projectId' element={<ProjectCreateStep2 />} />
-                <Route path="/project/:projectId" element={<ProjectId />} />
+                <Route path='/project/:projectId' element={<ProjectId />} />
                 <Route path='/project/edit/:projectId' element={<ProjectEdit />} />
                 <Route path='/invite/:projectId' element={<Invite />} />
               </>

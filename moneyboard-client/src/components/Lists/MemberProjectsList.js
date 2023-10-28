@@ -29,7 +29,6 @@ const MemberProjectsList = () => {
                     else {
                         dispatch(setProjectsExist(false));
                     }
-                    //console.log(data);
                 } else {
                     console.error('Error', response.statusText);
                 }
@@ -49,8 +48,8 @@ const MemberProjectsList = () => {
                     <div>
                         <ul className='ps-2'>
                             {projects.map(project => (
-                                <li key={project.ProjectId} className="list-unstyled">
-                                    <Link to={`/project/${project.ProjectId}`} className="text-decoration-none text-light">
+                                <li key={project.ProjectId} className='list-unstyled'>
+                                    <Link to={`/project/${project.ProjectId}`} className='text-decoration-none text-light'>
                                         <div className='ms-0 m-1'>
                                             <HexagonFill className='me-1 pb-1' size={23}></HexagonFill>
                                             <span className='fw-semibold'>{project.Name}</span>

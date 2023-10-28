@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
 import RolesNPoints from '../../../components/ProjectEditComponents/RolesNPoints';
 import ProjectNCard from '../../../components/ProjectEditComponents/ProjectNCard';
 import { useSelector } from 'react-redux';
@@ -81,7 +81,7 @@ const ProjectEdit = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <div className=" mt-5 mx-auto col-4">
+                            <div className=' mt-5 mx-auto col-4'>
                                 <Button
                                     variant='danger'
                                     className='my-4 w-100'
@@ -93,17 +93,17 @@ const ProjectEdit = () => {
                                         <span>Delete Project</span>
                                     </div>
                                 </Button>
-                                <Modal show={show} onHide={handleClose} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
+                                <Modal show={show} onHide={handleClose} animation={true} aria-labelledby='contained-modal-title-vcenter' centered>
                                     <Modal.Body className='text-center'>
                                         <XCircle className='text-danger my-4' size={100}></XCircle>
                                         <h2>Are You Sure?</h2>
                                         <p>Your project and all its data will be permanently deleted for you and all other project participants.</p>
                                         <Container className='mt-4 mb-2'>
-                                            <Button variant="secondary" onClick={handleClose} className='col-4 mx-3'>
+                                            <Button variant='secondary' onClick={handleClose} className='col-4 mx-3'>
                                                 No
                                             </Button>
                                             <Button
-                                                variant="danger"
+                                                variant='danger'
                                                 onClick={(e) => {
                                                     handleClose();
                                                     handleDeleteProject();

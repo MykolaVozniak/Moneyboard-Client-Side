@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
   },
-  preloadedState: initialState // Додаємо початковий стан з localStorage
+  preloadedState: initialState
 });
 
 store.subscribe(() => {

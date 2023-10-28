@@ -28,11 +28,11 @@ const Home = () => {
                                 <div className='mt-4 w-100'>
                                     {user ? (
                                         <Link to='/workspace'>
-                                            <Button variant='success' size="lg">Get to work!</Button>
+                                            <Button variant='success' size='lg'>Get to work!</Button>
                                         </Link>
                                     ) : (
                                         <Link to='/login'>
-                                            <Button variant='success' size="lg">Get started!</Button>
+                                            <Button variant='success' size='lg'>Get started!</Button>
                                         </Link>
                                     )}
                                 </div>

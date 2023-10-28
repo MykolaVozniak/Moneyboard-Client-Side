@@ -77,7 +77,7 @@ const ChangePassword = () => {
                 handleLogout();
             } else {
                 const dataError = await response.json();
-                if (dataError.error = "In order to delete the account, you need to exit all projects") {
+                if (dataError.error = 'In order to delete the account, you need to exit all projects') {
                     setShowNoDelete(true);
                 }
             }
@@ -88,7 +88,7 @@ const ChangePassword = () => {
 
     return (
         <div className='container col-sm-12 col-md-4 my-4'>
-            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+            <div className='card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg'>
                 <h2 className='text-center'>Change Password</h2>
                 {error && (
                     <div className='card rounded-2 p-2 mt-2 border-danger'>
@@ -103,14 +103,14 @@ const ChangePassword = () => {
                 )}
 
                 <Form onSubmit={handlePasswordSubmit}>
-                    <Form.Group className="row mt-3">
+                    <Form.Group className='row mt-3'>
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">Current Password:</p>
+                            <p className='m-0 fw-bold'>Current Password:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="password"
-                                name="currentPassword"
+                                type='password'
+                                name='currentPassword'
                                 className='m-0 p-2 text-center'
                                 value={passwordFormData.currentPassword}
                                 onChange={handlePasswordChange}
@@ -119,14 +119,14 @@ const ChangePassword = () => {
                         </div>
                     </Form.Group>
 
-                    <Form.Group className="row mt-3">
+                    <Form.Group className='row mt-3'>
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">New Password:</p>
+                            <p className='m-0 fw-bold'>New Password:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="password"
-                                name="newPassword"
+                                type='password'
+                                name='newPassword'
                                 className='m-0 p-2 text-center'
                                 value={passwordFormData.newPassword}
                                 onChange={handlePasswordChange}
@@ -136,7 +136,7 @@ const ChangePassword = () => {
                     </Form.Group>
 
                     <div className='d-flex justify-content-center my-4'>
-                        <Button variant="primary" type="submit" className='col-8'>
+                        <Button variant='primary' type='submit' className='col-8'>
                             Change Password
                         </Button>
                     </div>
@@ -153,17 +153,17 @@ const ChangePassword = () => {
                         <PersonX className='me-1 m-0 p-0 pb-1' size={25}></PersonX>
                         <span>Delete Account</span>
                     </Button>
-                    <Modal show={show} onHide={handleClose} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
+                    <Modal show={show} onHide={handleClose} animation={true} aria-labelledby='contained-modal-title-vcenter' centered>
                         <Modal.Body className='text-center'>
                             <XCircle className='text-danger my-4' size={100}></XCircle>
                             <h2>Are You Sure?</h2>
                             <p>Your account and all its data will be permanently deleted!</p>
                             <Container className='mt-4 mb-2'>
-                                <Button variant="secondary" onClick={handleClose} className='col-4 mx-3'>
+                                <Button variant='secondary' onClick={handleClose} className='col-4 mx-3'>
                                     No
                                 </Button>
                                 <Button
-                                    variant="danger"
+                                    variant='danger'
                                     onClick={(e) => {
                                         handleClose();
                                         handleDeleteAccount();
@@ -175,13 +175,13 @@ const ChangePassword = () => {
                             </Container>
                         </Modal.Body>
                     </Modal>
-                    <Modal show={showNoDelete} onHide={() => setShowNoDelete(false)} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
+                    <Modal show={showNoDelete} onHide={() => setShowNoDelete(false)} animation={true} aria-labelledby='contained-modal-title-vcenter' centered>
                         <Modal.Body className='text-center'>
                             <ExclamationCircle className='text-danger my-4' size={100}></ExclamationCircle>
                             <h2>Action is not possible!</h2>
                             <p>In order to delete the account, you need to exit all projects.</p>
                             <Container className='mt-4 mb-2'>
-                                <Button variant="danger" onClick={() => setShowNoDelete(false)} className='col-4 mx-3'>
+                                <Button variant='danger' onClick={() => setShowNoDelete(false)} className='col-4 mx-3'>
                                     Ok
                                 </Button>
                             </Container>

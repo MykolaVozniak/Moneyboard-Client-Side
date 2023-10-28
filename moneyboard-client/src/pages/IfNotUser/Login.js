@@ -38,7 +38,6 @@ const Login = () => {
             });
             if (responseLogin.ok) {
                 const dataLogin = await responseLogin.json();
-                //console.log(dataLogin);
                 dispatch(setUser(dataLogin));
 
                 const responseInfo = await fetch(config.API_USER_INFO, {
@@ -49,8 +48,6 @@ const Login = () => {
                 });
                 const dataInfo = await responseInfo.json();
                 dispatch(setUserInfo(dataInfo));
-                //console.log(dataInfo);
-                //alert('Success');
                 if (fullPath.includes(invitePath)){
                 }
                 else{
@@ -59,8 +56,6 @@ const Login = () => {
             } else {
                 const dataError = await responseLogin.json();
                 setError(dataError.error);
-                //console.log(dataError.error);
-                //alert(`Error: ${dataError.Message}`);
             }
         } catch (error) {
             console.error(error);
@@ -81,10 +76,10 @@ const Login = () => {
                                     </Card>
                                 )}
                                 <Form onSubmit={handleSubmit}>
-                                    <InputGroup className="mt-4">
+                                    <InputGroup className='mt-4'>
                                         <FormControl
-                                            type="email"
-                                            name="email"
+                                            type='email'
+                                            name='email'
                                             placeholder='Your email'
                                             value={formData.email}
                                             onChange={handleChange}
@@ -92,10 +87,10 @@ const Login = () => {
                                             required
                                         />
                                     </InputGroup>
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <FormControl
-                                            type="password"
-                                            name="password"
+                                            type='password'
+                                            name='password'
                                             placeholder='Your password'
                                             value={formData.password}
                                             onChange={handleChange}
@@ -104,7 +99,7 @@ const Login = () => {
                                         />
                                     </InputGroup>
                                     <div className='d-flex justify-content-center mt-4'>
-                                        <Button type='submit' variant="primary" className='col-8'>Submit</Button>
+                                        <Button type='submit' variant='primary' className='col-8'>Submit</Button>
                                     </div>
                                 </Form>
                                 <div className='mt-3'>

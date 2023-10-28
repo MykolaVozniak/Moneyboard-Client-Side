@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import config from "../../config";
-import { Badge, Button, Card, Col, Container, Form, FormControl, InputGroup, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import config from '../../config';
+import { Badge, Button, Card, Col, Container, Form, FormControl, InputGroup, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import SpinnerPage from '../SpinnerPage';
 import { App, LockFill, Plus, XCircle } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router';
@@ -216,7 +216,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     }
 
     if (oks === (1 + roles.length) && rightButton) {
-        console.log('yay!');
         navigate(buttonLink);
         setOks(0);
     }
@@ -224,7 +223,7 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     return (
         <>
             <h2 className='text-center'>Build the Role List for Your Project</h2>
-            <Container className="col-sm-12 col-md-11 p-0">
+            <Container className='col-sm-12 col-md-11 p-0'>
                 {errors.length > 0 && (
                     <div className='card rounded-2 p-2 mt-4 border-danger'>
                         {errors.map((error, index) => (
@@ -254,23 +253,23 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                     </Row>
                     <ul className='p-0'>
                         {roles.map((role, index) => (
-                            <li key={index} className="list-unstyled">
+                            <li key={index} className='list-unstyled'>
                                 <Row>
                                     <Col xs={10} className='ps-3 pe-1'>
-                                        <InputGroup className="mt-2">
+                                        <InputGroup className='mt-2'>
                                             <FormControl
-                                                type="text"
-                                                name="roleName"
-                                                placeholder="Role Name"
-                                                className="form-control"
+                                                type='text'
+                                                name='roleName'
+                                                placeholder='Role Name'
+                                                className='form-control'
                                                 value={role.RoleName}
                                                 onChange={(e) => handleRoleChange(e, index, 'RoleName')}
                                                 required
                                             />
                                             <FormControl
-                                                type="number"
-                                                name="rolePoints"
-                                                className="form-control"
+                                                type='number'
+                                                name='rolePoints'
+                                                className='form-control'
                                                 value={role.RolePoints}
                                                 onChange={(e) => handleRoleChange(e, index, 'RolePoints')}
                                                 required
@@ -279,11 +278,11 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                                     </Col>
                                     <Col xs={2} className='ps-1 pe-3'>
                                         <OverlayTrigger
-                                            placement="top"
-                                            overlay={<Tooltip id="tooltip-copied">{role.IsDefolt !== null ? (role.IsDefolt ? 'This is a role for the project owner. Removal is not possible!' : 'This role is for newly arrived people. Removal is not possible!') : 'Click to delete'}</Tooltip>}
+                                            placement='top'
+                                            overlay={<Tooltip id='tooltip-copied'>{role.IsDefolt !== null ? (role.IsDefolt ? 'This is a role for the project owner. Removal is not possible!' : 'This role is for newly arrived people. Removal is not possible!') : 'Click to delete'}</Tooltip>}
                                         >
                                             <Button
-                                                className="mt-2 d-flex justify-content-center w-100"
+                                                className='mt-2 d-flex justify-content-center w-100'
                                                 variant={role.IsDefolt === null ? 'danger' : 'warning'}
                                                 onClick={() => role.IsDefolt === null && handleDeleteRole(role.RoleId)}
                                             >
@@ -296,7 +295,7 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                         ))}
                     </ul>
                     <Button
-                        variant="success"
+                        variant='success'
                         onClick={(e) => {
                             clearErrors();
                             clearOks();
@@ -312,9 +311,9 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
                         <p className='text-center m-0'>
                             <div className='d-inline-block col-3 me-2'>
                                 <FormControl
-                                    type="number"
-                                    name="projectPoinPercent"
-                                    placeholder="Project Point Percent"
+                                    type='number'
+                                    name='projectPoinPercent'
+                                    placeholder='Project Point Percent'
                                     className='form-control text-center  px-0 ps-3'
                                     value={projectPoinPercent}
                                     onChange={(e) => setProjectPoinPercent(e.target.value)}
@@ -327,7 +326,7 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
 
                     <Button
                         type='submit'
-                        variant="primary"
+                        variant='primary'
                         className='mt-4 d-flex justify-content-center w-100'
                         onClick={() => {
                             clearErrors();

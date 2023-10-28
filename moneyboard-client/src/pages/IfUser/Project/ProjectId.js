@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Card, Col, Container, Dropdown, FormSelect, InputG
 import { CaretRightFill, DoorOpen, DoorOpenFill, ExclamationTriangle, Link45deg, PencilSquare, X, XCircle, XLg, XSquare } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import config from "../../../config"
+import config from '../../../config'
 import CopyToClipboard from 'react-copy-to-clipboard';
 import SpinnerPage from '../../../components/SpinnerPage';
 
@@ -67,7 +67,6 @@ const ProjectId = () => {
             });
 
             if (response.ok) {
-                console.log('Role assigned successfully:');
                 fetchProjectInfo();
             } else {
                 const dataError = await response.json();
@@ -121,7 +120,6 @@ const ProjectId = () => {
             } else {
                 const dataError = await response.json();
                 setError(dataError.error);
-                console.log(error);
                 navigate(`/NotFound`);
             }
         } catch (error) {
@@ -184,8 +182,8 @@ const ProjectId = () => {
 
     return (
         <Row className='h-100'>
-            <Col xs={12} md={4} className="h-100">
-                <div className="card rounded-4 border-0 shadow-lg bg-dark text-light  h-100">
+            <Col xs={12} md={4} className='h-100'>
+                <div className='card rounded-4 border-0 shadow-lg bg-dark text-light  h-100'>
                     <div className='px-5 pt-4'>
                         <Row className='d-flex align-items-center'>
                             <Col xs={9} className='text-start'>
@@ -193,7 +191,7 @@ const ProjectId = () => {
                             </Col>
                             {projectInfo.IsOwner && (
                                 <Col xs={3} className='text-end'>
-                                    <Link to={`/project/edit/${projectId}`} className="text-decoration-none text-light">
+                                    <Link to={`/project/edit/${projectId}`} className='text-decoration-none text-light'>
                                         <PencilSquare size={33}></PencilSquare>
                                     </Link>
                                 </Col>
@@ -208,7 +206,6 @@ const ProjectId = () => {
                             { label: 'Base Salary', value: projectInfo.BaseSalary },
                             { label: 'Salary Date', value: projectInfo.SalaryDate },
                             { label: 'Members', value: projectInfo.Members.length },
-                            //{ label: 'Is Owner', value: projectInfo.IsOwner ? 'Yes' : 'No' },
                         ].map(item => (
                             <div key={item.label} className='ms-0 m-1 mt-2'>
                                 <CaretRightFill className='me-1 pb-2' size={25}></CaretRightFill>
@@ -218,10 +215,10 @@ const ProjectId = () => {
                     </div>
                     <div className='h-100 d-flex justify-content-center'>
                         {projectInfo.IsOwner && (
-                            <div className=" mt-auto mx-auto col-8">
+                            <div className=' mt-auto mx-auto col-8'>
                                 <OverlayTrigger
-                                    placement="top"
-                                    overlay={<Tooltip id="tooltip-copied">Copied Successfully!</Tooltip>}
+                                    placement='top'
+                                    overlay={<Tooltip id='tooltip-copied'>Copied Successfully!</Tooltip>}
                                     show={tooltipVisible}
                                 >
                                     <CopyToClipboard text={invitePath}>
@@ -240,7 +237,7 @@ const ProjectId = () => {
                             </div>
                         )}
                         {!projectInfo.IsOwner && (
-                            <div className=" mt-auto mx-auto col-8">
+                            <div className=' mt-auto mx-auto col-8'>
                                 <Button
                                     variant='danger'
                                     className='btn-lg my-4 w-100'
@@ -252,17 +249,17 @@ const ProjectId = () => {
                                         <span>Leave the Project</span>
                                     </div>
                                 </Button>
-                                <Modal show={show} onHide={handleClose} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
+                                <Modal show={show} onHide={handleClose} animation={true} aria-labelledby='contained-modal-title-vcenter' centered>
                                     <Modal.Body className='text-center'>
                                         <XCircle className='text-danger my-4' size={100}></XCircle>
                                         <h2>Are You Sure?</h2>
                                         <p>This action will delete all your data from the project, and the project will no longer be available to you.</p>
                                         <Container className='mt-4 mb-2'>
-                                            <Button variant="secondary" onClick={handleClose} className='col-4 mx-3'>
+                                            <Button variant='secondary' onClick={handleClose} className='col-4 mx-3'>
                                                 No
                                             </Button>
                                             <Button
-                                                variant="danger"
+                                                variant='danger'
                                                 onClick={(e) => {
                                                     handleClose();
                                                     handleLeaveProject();
@@ -279,10 +276,10 @@ const ProjectId = () => {
                     </div>
                 </div>
             </Col>
-            <Col xs={12} md={8} className="h-100">
-                <div className="card p-4 rounded-4 border-0 shadow-lg h-100">
+            <Col xs={12} md={8} className='h-100'>
+                <div className='card p-4 rounded-4 border-0 shadow-lg h-100'>
                     <Card className='border-4 rounded-3'>
-                        <Container className="overflow-auto">
+                        <Container className='overflow-auto'>
                             <Row className='fw-semibold d-flex flex-nowrap p-1'>
                                 <Col xs={4} md={2} className='m-0 p-1'><p className='bg-dark text-light bg-opacity-75 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-2'>Member</p></Col>
                                 <Col xs={4} md={2} className='m-0 p-1'><p className='bg-dark text-light bg-opacity-75 rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0 py-2'>Role</p></Col>
@@ -306,7 +303,7 @@ const ProjectId = () => {
                                                     </p>
                                                 ) : (
                                                     <Dropdown className='w-100 h-100'>
-                                                        <Dropdown.Toggle style={{ whiteSpace: 'normal' }} variant="secondary" id="dropdown-basic" className='bg-white text-dark border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'>
+                                                        <Dropdown.Toggle style={{ whiteSpace: 'normal' }} variant='secondary' id='dropdown-basic' className='bg-white text-dark border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'>
                                                         {member.UserName}
                                                         </Dropdown.Toggle>
 
@@ -332,9 +329,9 @@ const ProjectId = () => {
                                                 ) : (
                                                     <InputGroup className='w-100 h-100'>
                                                         <FormSelect
-                                                            as="select"
-                                                            name="role"
-                                                            value={member.RoleId} // Assuming RoleId is the correct identifier for the role
+                                                            as='select'
+                                                            name='role'
+                                                            value={member.RoleId}
                                                             onChange={(e) => handleRoleAssignment(member.UserId, e.target.value)}
                                                             required
                                                             className='border border-opacity-50 border-info rounded-2 d-flex align-items-center justify-content-center text-center w-100 h-100 m-0 p-0'
@@ -374,13 +371,13 @@ const ProjectId = () => {
                                         <p className='d-inline text-danger m-0'>Not enough money: {((totalSalaryData.BankCardMoney) - (totalSalaryData.TotalPayment)) * (-1)} {projectInfo.Currency}</p>
                                     )}
                                 </Card>
-                                <Modal show={showNotEnoughModal} onHide={() => setShowNotEnoughModal(false)} animation={true} aria-labelledby="contained-modal-title-vcenter" centered>
+                                <Modal show={showNotEnoughModal} onHide={() => setShowNotEnoughModal(false)} animation={true} aria-labelledby='contained-modal-title-vcenter' centered>
                                     <Modal.Body className='text-center'>
                                         <ExclamationTriangle className='text-warning my-4' size={100}></ExclamationTriangle>
                                         <h2>Not Enough Money!</h2>
                                         <p>In case of non-payment, your project will be deleted! Deposit enough money to your card account to avoid this.</p>
                                         <Container className='mt-4 mb-2'>
-                                            <Button variant="warning" onClick={() => setShowNotEnoughModal(false)} className='col-4 mx-3'>
+                                            <Button variant='warning' onClick={() => setShowNotEnoughModal(false)} className='col-4 mx-3'>
                                                 Ok
                                             </Button>
                                         </Container>

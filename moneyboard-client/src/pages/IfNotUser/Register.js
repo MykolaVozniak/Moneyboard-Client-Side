@@ -33,16 +33,13 @@ const Register = () => {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                //alert('Success!');
                 setError(null);
                 navigate('/login');
             } else {
                 const dataError = await response.json();
                 setError(dataError.errors);
-                //console.error(dataError.errors);
             }
         } catch (error) {
-            //console.error(error);
             setError((prevError) => ({
                 ...prevError,
                 NewErrorKey: ['Unknown error, check the correctness of the entered data.']
@@ -99,7 +96,7 @@ const Register = () => {
                                         </Col>
                                     </Row>
 
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <FormControl
                                             type='email'
                                             name='email'
@@ -111,7 +108,7 @@ const Register = () => {
                                         />
                                     </InputGroup>
 
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <FormControl
                                             type='password'
                                             name='password'
@@ -123,7 +120,7 @@ const Register = () => {
                                         />
                                     </InputGroup>
 
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <FormControl
                                             type='password'
                                             name='confirmPassword'
@@ -135,7 +132,7 @@ const Register = () => {
                                         />
                                     </InputGroup>
 
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <FormControl
                                             type='number'
                                             name='cardNumber'
@@ -147,7 +144,7 @@ const Register = () => {
                                         />
                                     </InputGroup>
 
-                                    <InputGroup className="mt-3">
+                                    <InputGroup className='mt-3'>
                                         <InputGroup.Text>Birthdate</InputGroup.Text>
                                         <FormControl
                                             type='date'
@@ -159,7 +156,7 @@ const Register = () => {
                                         />
                                     </InputGroup>
                                     <div className='d-flex justify-content-center mt-4'>
-                                        <Button type='submit' variant="primary" className='col-8'>Submit</Button>
+                                        <Button type='submit' variant='primary' className='col-8'>Submit</Button>
                                     </div>
                                 </Form>
                                 <div className='mt-3'>

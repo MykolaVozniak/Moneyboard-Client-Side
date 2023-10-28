@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import config from "../../config";
+import config from '../../config';
 import { Button, Card, Col, Container, Form, FormControl, FormSelect, InputGroup, Row } from 'react-bootstrap';
 import SpinnerPage from '../../components/SpinnerPage';
 
@@ -32,7 +32,6 @@ const ProjectNCard = () => {
 
     const handleProjectChange = (e) => {
         const { name, value } = e.target;
-        console.log(value);
         setFormData({
             ...formData,
             [name]: value,
@@ -41,7 +40,6 @@ const ProjectNCard = () => {
 
     const handleCardChange = (e) => {
         const { name, value } = e.target;
-        console.log(value);
         setCardData({
             ...cardData,
             [name]: value,
@@ -187,7 +185,7 @@ const ProjectNCard = () => {
     return (
         <>
             <h2 className='text-center'>Edit Project Details</h2>
-            <Container className="col-sm-12 col-md-11">
+            <Container className='col-sm-12 col-md-11'>
                 {error && (
                     <div className='card rounded-2 p-2 mt-4 border-danger'>
                         {Object.keys(error).map((key) => (
@@ -200,55 +198,55 @@ const ProjectNCard = () => {
                     </div>
                 )}
                 <Form onSubmit={(e) => { handleSubmitCardEdit(e); handleSubmitProjectEdit(e); }}>
-                    <InputGroup className="mt-4">
+                    <InputGroup className='mt-4'>
                         <FormControl
-                            type="text"
-                            name="name"
+                            type='text'
+                            name='name'
                             placeholder='Project Name'
                             value={formData.name}
                             onChange={handleProjectChange}
                             className='form-control text-center'
                             required
-                            size="lg"
+                            size='lg'
                         />
                     </InputGroup>
-                    <InputGroup className="mt-3">
+                    <InputGroup className='mt-3'>
                         <InputGroup.Text className='w-50'>Project Currency</InputGroup.Text>
                         <FormSelect
-                            as="select"
-                            name="currency"
+                            as='select'
+                            name='currency'
                             value={formData.currency}
                             onChange={handleProjectChange}
                             className='form-control'
                             required
                         >
-                            <option value="">Select...</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">EUR</option>
-                            <option value="UAH">UAH</option>
-                            <option value="PLN">PLN</option>
-                            <option value="GBP">GBP</option>
-                            <option value="JPY">JPY</option>
-                            <option value="CAD">CAD</option>
-                            <option value="AUD">AUD</option>
+                            <option value=''>Select...</option>
+                            <option value='USD'>USD</option>
+                            <option value='EUR'>EUR</option>
+                            <option value='UAH'>UAH</option>
+                            <option value='PLN'>PLN</option>
+                            <option value='GBP'>GBP</option>
+                            <option value='JPY'>JPY</option>
+                            <option value='CAD'>CAD</option>
+                            <option value='AUD'>AUD</option>
                         </FormSelect>
                     </InputGroup>
-                    <InputGroup className="mt-3">
+                    <InputGroup className='mt-3'>
                         <InputGroup.Text className='w-50'>Base Salary</InputGroup.Text>
                         <FormControl
-                            type="number"
-                            name="baseSalary"
+                            type='number'
+                            name='baseSalary'
                             value={formData.baseSalary}
                             onChange={handleProjectChange}
                             className='form-control'
                             required
                         />
                     </InputGroup>
-                    <InputGroup className="mt-3">
+                    <InputGroup className='mt-3'>
                         <InputGroup.Text >Payday is the </InputGroup.Text>
                         <FormControl
-                            type="number"
-                            name="salaryDay"
+                            type='number'
+                            name='salaryDay'
                             value={formData.salaryDay}
                             onChange={handleProjectChange}
                             className='form-control text-center'
@@ -256,13 +254,13 @@ const ProjectNCard = () => {
                         />
                         <InputGroup.Text>day of every month</InputGroup.Text>
                     </InputGroup>
-                    <Card bg="success" className="rounded-3 border-0 text-light mt-4 px-4">
+                    <Card bg='success' className='rounded-3 border-0 text-light mt-4 px-4'>
                         <h5 className='text-light text-center mt-3 mb-0'>YOUR CARD DETAILS</h5>
-                        <InputGroup className="mt-3">
+                        <InputGroup className='mt-3'>
                             <FormControl
-                                type="number"
-                                name="cardNumber"
-                                placeholder="Card Number"
+                                type='number'
+                                name='cardNumber'
+                                placeholder='Card Number'
                                 value={cardData.cardNumber}
                                 onChange={handleCardChange}
                                 className='form-control bg-success-subtle'
@@ -271,10 +269,10 @@ const ProjectNCard = () => {
                         </InputGroup>
                         <Row>
                             <Col xs={7}>
-                                <InputGroup className="mt-3">
+                                <InputGroup className='mt-3'>
                                     <FormControl
-                                        type="month"
-                                        name="expirationDate"
+                                        type='month'
+                                        name='expirationDate'
                                         value={cardData.expirationDate}
                                         onChange={handleCardChange}
                                         className='form-control bg-success-subtle'
@@ -283,11 +281,11 @@ const ProjectNCard = () => {
                                 </InputGroup>
                             </Col>
                             <Col xs={5}>
-                                <InputGroup className="mt-3">
+                                <InputGroup className='mt-3'>
                                     <FormControl
-                                        type="number"
-                                        name="cardVerificationValue"
-                                        placeholder="CVV2"
+                                        type='number'
+                                        name='cardVerificationValue'
+                                        placeholder='CVV2'
                                         value={cardData.cardVerificationValue}
                                         onChange={handleCardChange}
                                         className='form-control bg-success-subtle'
@@ -296,12 +294,12 @@ const ProjectNCard = () => {
                                 </InputGroup>
                             </Col>
                         </Row>
-                        <InputGroup className="mt-3 mb-4">
+                        <InputGroup className='mt-3 mb-4'>
                             <InputGroup.Text className='bg-success-subtle'>Available money:</InputGroup.Text>
                             <FormControl
-                                type="number"
-                                name="money"
-                                placeholder="Amount"
+                                type='number'
+                                name='money'
+                                placeholder='Amount'
                                 value={cardData.money}
                                 onChange={handleCardChange}
                                 className='form-control bg-success-subtle border-3 border-bottom-0 border-top-0 border-light'
@@ -316,7 +314,7 @@ const ProjectNCard = () => {
                         </InputGroup>
                     </Card>
                     <div className='d-flex justify-content-center mt-4'>
-                        <Button type='submit' variant="primary" className='col-8'>Save Changes</Button>
+                        <Button type='submit' variant='primary' className='col-8'>Save Changes</Button>
                     </div>
                 </Form>
             </Container>

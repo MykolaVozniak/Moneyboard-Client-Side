@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-import config from "../../config";
+import config from '../../config';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SpinnerPage from '../../components/SpinnerPage';
@@ -48,18 +48,14 @@ const Invite = () => {
                     'Authorization': `Bearer ${user.Token}`,
                 },
             });
-            console.log(`${config.API_PROJECT_ADD_MEMBER}${projectId}`);
-
             if (response.ok) {
                 setError(null);
                 navigate(`/project/${projectId}`);
             } else {
                 const dataError = await response.json();
                 setError(dataError.error);
-                //console.error(dataError.error);
             }
         } catch (error) {
-            //console.error(error);
             setError(error);
         }
     };
@@ -79,17 +75,17 @@ const Invite = () => {
                     <Row>
                         <Col xs={12} className='d-flex align-items-center justify-content-center'>
                             <Container className='bg-white border-0 rounded-4 shadow-lg px-5 py-4 m-5 col-sm-12 col-md-6'>
-                                <h2 className='text-center'>Invitation to the "{projectInfo.Name}"</h2>
+                                <h2 className='text-center'>Invitation to the '{projectInfo.Name}'</h2>
                                 <p className='text-center text-muted mt-2'>By {projectInfo.OwnerName}</p>
                                 {/* <span ><Image src={`${config.LOCALHOST_URL}/images/users/${projectInfo.OwnerURL}`} roundedCircle height='25' className='mb-1 border border-2 border-secondary'/></span>               */}
-                                <Container className="mt-4">
+                                <Container className='mt-4'>
                                     <p className='mt-4'>Project Currency: {projectInfo.Currency}.</p>
                                     <p>Base Salary: {projectInfo.BaseSalary} {projectInfo.Currency} / month.</p>
                                     <p>Payday: {projectInfo.PayDay} day of every month.</p>
                                     <Row>
                                         <Col>
                                             <div className='d-flex justify-content-center mt-4'>
-                                                <Button variant="success" className='col-12' onClick={handleApply}>Apply</Button>
+                                                <Button variant='success' className='col-12' onClick={handleApply}>Apply</Button>
                                             </div>
                                         </Col>
                                         <Col>

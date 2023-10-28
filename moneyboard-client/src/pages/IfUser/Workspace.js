@@ -12,15 +12,15 @@ const Workspace = () => {
 
   return (
       <Row className='h-100'>
-        <Col xs={12} md={4} className="h-100">
-          <div className="card rounded-4 border-0 shadow-lg bg-dark text-light h-100">
+        <Col xs={12} md={4} className='h-100'>
+          <div className='card rounded-4 border-0 shadow-lg bg-dark text-light h-100'>
             <div className='px-5 pt-4'>
               <Row className='d-flex align-items-center'>
                 <Col className='text-start'>
                   <h2>My Projects</h2>
                 </Col>
                 <Col className='text-end'>
-                  <Link to='/project/create/0' className="text-decoration-none text-light">
+                  <Link to='/project/create/0' className='text-decoration-none text-light'>
                     <IconForCreate size={33}></IconForCreate>
                   </Link>
                 </Col>
@@ -32,14 +32,14 @@ const Workspace = () => {
               <MemberProjectsList />
               {!isProjectListExist && (
                 <div className='h-100 d-flex align-items-center justify-content-center'>
-                  <h5 className="text-light fst-italic text-opacity-50">You are not involved in any project yet...</h5>
+                  <h5 className='text-light fst-italic text-opacity-50'>You are not involved in any project yet...</h5>
                 </div>
               )}
             </div>
           </div>
         </Col>
-        <Col xs={12} md={8} className="h-100">
-          <div className="card p-4 rounded-4 border-0 shadow-lg h-100"></div>
+        <Col xs={12} md={8} className='h-100'>
+          <div className='card p-4 rounded-4 border-0 shadow-lg h-100'></div>
         </Col>
       </Row>
   );

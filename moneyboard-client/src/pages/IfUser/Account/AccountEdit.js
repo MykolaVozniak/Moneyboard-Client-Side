@@ -60,7 +60,7 @@ const AccountEdit = () => {
 
     return (
         <div className='container col-sm-12 col-md-4 my-4'>
-            <div className="card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg">
+            <div className='card p-4 pb-1 my-5 rounded-4 border-0 shadow-lg'>
                 <h2 className='text-center'>Change Account Info</h2>
                 {error && (
                     <div className='card rounded-2 p-2 mt-2 border-danger'>
@@ -75,59 +75,56 @@ const AccountEdit = () => {
                 )}
                 <Form onSubmit={handleSubmit}>
 
-                    <Form.Group className="row mt-3">
+                    <Form.Group className='row mt-3'>
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">First Name:</p>
+                            <p className='m-0 fw-bold'>First Name:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="text"
-                                name="firstname"
+                                type='text'
+                                name='firstname'
                                 className='m-0 p-2 text-center'
                                 value={formData.firstname}
                                 onChange={handleChange}
                                 required
-                            //placeholder={info.Firstname}
                             />
                         </div>
                     </Form.Group>
 
-                    <Form.Group className="row mt-3">
+                    <Form.Group className='row mt-3'>
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">Last Name:</p>
+                            <p className='m-0 fw-bold'>Last Name:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="text"
-                                name="lastname"
+                                type='text'
+                                name='lastname'
                                 className='m-0 p-2 text-center'
                                 value={formData.lastname}
                                 onChange={handleChange}
                                 required
-                            //placeholder={info.Lastname}
                             />
                         </div>
                     </Form.Group>
 
-                    <Form.Group className="row mt-3">
+                    <Form.Group className='row mt-3'>
                         <div className='col-12 col-md-4 text-md-end text-center card p-2 border-0'>
-                            <p className="m-0 fw-bold">Card Number:</p>
+                            <p className='m-0 fw-bold'>Card Number:</p>
                         </div>
                         <div className='col-12 col-md-7 mx-2'>
                             <Form.Control
-                                type="number"
-                                name="cardNumber"
+                                type='number'
+                                name='cardNumber'
                                 className='m-0 p-2 text-center'
                                 value={formData.cardNumber}
                                 onChange={handleChange}
                                 required
-                            //placeholder={info.CardNumber}
                             />
                         </div>
                     </Form.Group>
 
                     <div className='d-flex justify-content-center my-4'>
-                        <Button variant="primary" type="submit" className='col-8'>
+                        <Button variant='primary' type='submit' className='col-8'>
                             Submit
                         </Button>
                     </div>

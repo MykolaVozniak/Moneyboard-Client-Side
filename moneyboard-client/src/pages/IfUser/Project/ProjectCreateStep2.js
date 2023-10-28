@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from 'react-bootstrap';
 import RolesNPoints from '../../../components/ProjectEditComponents/RolesNPoints';
 import config from '../../../config';
 import { useEffect, useState } from 'react';
@@ -25,11 +25,9 @@ const ProjectCreateStep2 = () => {
                 } else {
                     const dataError = await response.json();
                     setError(dataError.error);
-                    //console.log(dataError.error);
                 }
             } catch (error) {
                 setError(error);
-                //console.log(error);
             }
         };
     
