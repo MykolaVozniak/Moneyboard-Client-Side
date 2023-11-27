@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import config from '../../config';
 import { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HexagonFill } from 'react-bootstrap-icons';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setProjectsExist } from '../../redux/authSlice';
 
 const OwnerProjectsList = () => {
@@ -24,7 +24,7 @@ const OwnerProjectsList = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
-                    if (data.length !==0) {
+                    if (data.length !== 0) {
                         dispatch(setProjectsExist(true));
                     }
                     else {
@@ -49,8 +49,8 @@ const OwnerProjectsList = () => {
                     <div>
                         <ul className='ps-2'>
                             {projects.map(project => (
-                                <li key={project.ProjectId} className='list-unstyled'>
-                                    <Link to={`/project/${project.ProjectId}`} className='text-decoration-none text-light'>
+                                <li key={project.ProjectId} className="list-unstyled">
+                                    <Link to={`/project/${project.ProjectId}`} className="text-decoration-none text-light">
                                         <div className='ms-0 m-1'>
                                             <HexagonFill className='me-1 pb-1' size={23}></HexagonFill>
                                             <span className='fw-semibold'>{project.Name}</span>

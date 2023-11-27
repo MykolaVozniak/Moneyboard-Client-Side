@@ -1,4 +1,4 @@
-const LOCALHOST_URL = 'https://localhost:44339/';
+const LOCALHOST_URL = 'https://localhost:7247/';
 
 const AUTH = 'api/Authentication/';
 const PROJECT = 'api/Project/';
@@ -17,24 +17,24 @@ const API_USER_DELETE = LOCALHOST_URL + USER + 'delete';
 const API_PROJECT_CREATE = LOCALHOST_URL + PROJECT + 'create';
 const API_PROJECT_OWNER_LIST = LOCALHOST_URL + PROJECT + 'owner';
 const API_PROJECT_MEMBER_LIST = LOCALHOST_URL + PROJECT + 'member';
-const API_PROJECT_ADD_MEMBER =  LOCALHOST_URL + PROJECT + 'add-member' + '/'
-const API_PROJECT_POINT =  LOCALHOST_URL + PROJECT + 'point' + '/'
-const API_PROJECT_INFO = LOCALHOST_URL + PROJECT + 'info' + '/';
-const API_PROJECT_DETAILS = LOCALHOST_URL + PROJECT + 'details' + '/';
-const API_PROJECT_LEAVE = LOCALHOST_URL + PROJECT + 'leave' + '/';
-const API_PROJECT_EDIT_BANK_CARD = LOCALHOST_URL + PROJECT + 'editBankCard' + '/';
-const API_PROJECT_EDIT_PROJECT = LOCALHOST_URL + PROJECT + 'editProject' + '/';
-const API_PROJECT_INFO_BANK_CARD = LOCALHOST_URL + PROJECT + 'infoBankCard' + '/';
-const API_PROJECT_CALCULATE_TOTAL_PAYMENTS = LOCALHOST_URL + PROJECT + 'calculate-total-payments' + '/';
-const API_PROJECT_PROCESS_SALARY = LOCALHOST_URL + PROJECT + 'process-salary' + '/';
-const API_PROJECT_DELETE = LOCALHOST_URL + PROJECT + 'delete' + '/';
-const API_PROJECT_KICK = LOCALHOST_URL + PROJECT + 'kicked' + '/';
+const API_PROJECT_ADD_MEMBER =  LOCALHOST_URL + PROJECT + 'add-member/'
+const API_PROJECT_POINT =  LOCALHOST_URL + PROJECT + 'point/'
+const API_PROJECT_INFO = LOCALHOST_URL + PROJECT + 'info/';
+const API_PROJECT_DETAILS = LOCALHOST_URL + PROJECT + 'details/';
+const API_PROJECT_LEAVE = LOCALHOST_URL + PROJECT + 'leave/';
+const API_PROJECT_EDIT_BANK_CARD = LOCALHOST_URL + PROJECT + 'editBankCard/';
+const API_PROJECT_EDIT_PROJECT = LOCALHOST_URL + PROJECT + 'editProject/';
+const API_PROJECT_INFO_BANK_CARD = LOCALHOST_URL + PROJECT + 'infoBankCard/';
+const API_PROJECT_CALCULATE_TOTAL_PAYMENTS = LOCALHOST_URL + PROJECT + 'calculate-total-payments/';
+const API_PROJECT_PROCESS_SALARY = LOCALHOST_URL + PROJECT + 'process-salary/';
+const API_PROJECT_DELETE = LOCALHOST_URL + PROJECT + 'delete/';
+const API_PROJECT_KICK = LOCALHOST_URL + PROJECT + 'kicked/';
 
-const API_ROLE_PROJECT = LOCALHOST_URL + ROLE + 'project' + '/'
-const API_ROLE_EDIT =  LOCALHOST_URL + ROLE + 'edit' + '/'
-const API_ROLE_CREATE = LOCALHOST_URL + ROLE + 'create' + '/'
-const API_ROLE_DELETE = LOCALHOST_URL + ROLE + 'delete' + '/'
-const API_ROLE_ASSIGNMENT = LOCALHOST_URL + ROLE + 'role-assignment' + '/'
+const API_ROLE_PROJECT = LOCALHOST_URL + ROLE + 'project/'
+const API_ROLE_EDIT =  LOCALHOST_URL + ROLE + 'edit/'
+const API_ROLE_CREATE = LOCALHOST_URL + ROLE + 'create/'
+const API_ROLE_DELETE = LOCALHOST_URL + ROLE + 'delete/'
+const API_ROLE_ASSIGNMENT = LOCALHOST_URL + ROLE + 'role-assignment/'
 
 const config = {
     LOCALHOST_URL,

@@ -5,7 +5,6 @@ import { PlusSquare as IconForCreate } from 'react-bootstrap-icons';
 import OwnerProjectsList from '../../components/Lists/OwnerProjectsList';
 import MemberProjectsList from '../../components/Lists/MemberProjectsList';
 import { useSelector } from 'react-redux';
-import SpinnerPage from '../../components/SpinnerPage';
 
 const Workspace = () => {
   const isProjectListExist = useSelector((state) => state.auth.isProjectsExist);

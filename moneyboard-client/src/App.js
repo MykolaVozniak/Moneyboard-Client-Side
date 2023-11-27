@@ -24,9 +24,6 @@ import ProjectEdit from './pages/IfUser/Project/ProjectEdit';
 
 import Invite from './pages/IfUser/Invite'
 
-
-
-
 const App = () => {
   const user = useSelector((state) => state.auth.user);
 

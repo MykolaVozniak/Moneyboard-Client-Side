@@ -47,7 +47,7 @@ const Layout = () => {
                 </Nav>
                 <Nav className='col justify-content-end'>
                   <Nav.Link as={Link} to='/account' onClick={() => setExpanded(false)}>My Account</Nav.Link>
-                  <Nav.Link onClick={() => {handleLogout(); setExpanded(false);}} as={Link} to='/'>Logout</Nav.Link>
+                  <Nav.Link onClick={() => { handleLogout(); setExpanded(false); }} as={Link} to='/'>Logout</Nav.Link>
                 </Nav>
               </>
             ) : (
@@ -76,7 +76,8 @@ const Layout = () => {
 
       <footer className='mt-2 '>
         <div className='text-center py-2 text-bg-dark'>
-          &copy; 2023 - Moneyboard - <Link to='/privacy'>Privacy</Link>
+          <p className='m-0'><Link to='/ultrapoints' target='_blank'>About Ultrapoints System</Link></p>
+          <p className='m-0'>&copy; 2023 - Moneyboard - <Link to='/privacy'>Privacy</Link></p>
         </div>
       </footer>
     </div>

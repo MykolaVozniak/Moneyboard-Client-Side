@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import config from '../../../config'
 import { Button, Card, Col, Container, Form, FormControl, FormSelect, InputGroup, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectCreateStep1 = (props) => {
     const user = useSelector((state) => state.auth.user);

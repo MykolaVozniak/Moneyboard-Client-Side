@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { Button, Container, Form, Modal } from 'react-bootstrap';
 import config from '../../../config';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserInfo } from '../../../redux/authSlice';
 import { useNavigate } from 'react-router';
 import { ExclamationCircle, PersonX, XCircle } from 'react-bootstrap-icons';
 import { logoutUser } from '../../../redux/authSlice';
 
 const ChangePassword = () => {
-    const info = useSelector((state) => state.auth.info);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -77,7 +75,7 @@ const ChangePassword = () => {
                 handleLogout();
             } else {
                 const dataError = await response.json();
-                if (dataError.error = 'In order to delete the account, you need to exit all projects') {
+                if (dataError.error === 'In order to delete the account, you need to exit all projects') {
                     setShowNoDelete(true);
                 }
             }

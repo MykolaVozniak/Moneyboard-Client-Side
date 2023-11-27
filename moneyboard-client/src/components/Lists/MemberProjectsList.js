@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import config from '../../config';
 import { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HexagonFill } from 'react-bootstrap-icons';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setProjectsExist } from '../../redux/authSlice';
 
 const MemberProjectsList = () => {
@@ -23,7 +23,7 @@ const MemberProjectsList = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
-                    if (data.length !==0) {
+                    if (data.length !== 0) {
                         dispatch(setProjectsExist(true));
                     }
                     else {

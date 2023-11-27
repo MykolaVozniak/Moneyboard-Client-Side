@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import config from '../../config';
-import { Badge, Button, Card, Col, Container, Form, FormControl, InputGroup, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, FormControl, InputGroup, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import SpinnerPage from '../SpinnerPage';
 import { App, LockFill, Plus, XCircle } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router';
@@ -16,7 +16,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     const [rightButton, setRightButton] = useState(false);
     const [projectInfo, setProjectInfo] = useState(null);
     const [roles, setRoles] = useState([]);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [projectPoinPercent, setProjectPoinPercent] = useState(0);
 
     const criticalError = 'Unknown critical error';
@@ -41,7 +40,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     }
 
     const handleUpdateProjectPoint = async () => {
-        setIsSubmitting(true);
         try {
             const response = await fetch(`${config.API_PROJECT_POINT}${projectId}`, {
                 method: 'PUT',
@@ -62,7 +60,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
         } catch (error) {
             addError(criticalError);
         }
-        setIsSubmitting(false);
     };
 
     const updateRolesList = async () => {
@@ -93,7 +90,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     };
 
     const handleSubmitRole = async (role) => {
-        setIsSubmitting(true);
         try {
             const response = await fetch(`${config.API_ROLE_EDIT}${projectId}`, {
                 method: 'PUT',
@@ -115,7 +111,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
         } catch (error) {
             addError(criticalError);
         }
-        setIsSubmitting(false);
     };
 
     const handleSubmit = async (e) => {
@@ -129,7 +124,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
     const handleCreateRole = async (e) => {
         e.preventDefault();
         await handleSubmit(e);
-        setIsSubmitting(true);
         try {
             const response = await fetch(`${config.API_ROLE_CREATE}${projectId}`, {
                 method: 'POST',
@@ -150,12 +144,9 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
         } catch (error) {
             addError(criticalError);
         }
-
-        setIsSubmitting(false);
     };
 
     const handleDeleteRole = async (roleId) => {
-        setIsSubmitting(true);
         try {
             const response = await fetch(`${config.API_ROLE_DELETE}${roleId}`, {
                 method: 'DELETE',
@@ -174,7 +165,6 @@ const RolesNPoints = ({ projectId, buttonLink }) => {
         } catch (error) {
             addError(criticalError);
         }
-        setIsSubmitting(false);
     };
 
     useEffect(() => {

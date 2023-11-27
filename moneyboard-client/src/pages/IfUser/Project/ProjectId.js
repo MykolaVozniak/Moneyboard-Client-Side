@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Button, ButtonGroup, Card, Col, Container, Dropdown, FormSelect, InputGroup, Modal, OverlayTrigger, Row, SplitButton, Table, Tooltip } from 'react-bootstrap';
-import { CaretRightFill, DoorOpen, DoorOpenFill, ExclamationTriangle, Link45deg, PencilSquare, X, XCircle, XLg, XSquare } from 'react-bootstrap-icons';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, Col, Container, Dropdown, FormSelect, InputGroup, Modal, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+import { CaretRightFill, DoorOpenFill, ExclamationTriangle, Link45deg, PencilSquare, XCircle} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import config from '../../../config'
@@ -139,7 +139,7 @@ const ProjectId = () => {
                 const data = await response.json();
                 setError(null);
                 setTotalSalaryData(data);
-                if (data.IsEnough == true) {
+                if (data.IsEnough === true) {
                     setShowNotEnoughModal(true);
                 }
             } else {
@@ -364,9 +364,9 @@ const ProjectId = () => {
                     {projectInfo.IsOwner && (
                         <Container className='justify-content-center d-flex mt-auto mx-auto'>
                             <Col xs={6}>
-                                <Card className={`border-4 rounded-3 align-items-center justify-content-center text-center p-2 ${totalSalaryData.IsEnough == true ? 'border-danger' : ''}`}>
-                                    <h5 className={`fw-semibold d-inline m-1 ${totalSalaryData.IsEnough == true ? 'text-danger' : ''}`}>Required amount to be paid: {totalSalaryData.TotalPayment} {projectInfo.Currency}</h5>
-                                    <p className={`d-inline m-0 ${totalSalaryData.IsEnough == true ? 'text-danger' : 'text-muted'}`}>Amount on the card: {totalSalaryData.BankCardMoney} {projectInfo.Currency}</p>
+                                <Card className={`border-4 rounded-3 align-items-center justify-content-center text-center p-2 ${totalSalaryData.IsEnough === true ? 'border-danger' : ''}`}>
+                                    <h5 className={`fw-semibold d-inline m-1 ${totalSalaryData.IsEnough === true ? 'text-danger' : ''}`}>Required amount to be paid: {totalSalaryData.TotalPayment} {projectInfo.Currency}</h5>
+                                    <p className={`d-inline m-0 ${totalSalaryData.IsEnough === true ? 'text-danger' : 'text-muted'}`}>Amount on the card: {totalSalaryData.BankCardMoney} {projectInfo.Currency}</p>
                                     {totalSalaryData.IsEnough && (
                                         <p className='d-inline text-danger m-0'>Not enough money: {((totalSalaryData.BankCardMoney) - (totalSalaryData.TotalPayment)) * (-1)} {projectInfo.Currency}</p>
                                     )}
